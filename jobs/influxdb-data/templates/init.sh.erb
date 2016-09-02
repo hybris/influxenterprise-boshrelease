@@ -22,6 +22,30 @@
 # any config file values. Example: "-join http://1.2.3.4:8086"
 DEFAULT=/etc/default/influxdb
 
+#Some BOSH variable fro cluster testing
+export BOSHInstanceName=<%= spec.name %>
+export BOSHInstanceID=<%= spec.id %>
+export BOSHClusterLead=<% spec.bootstrap %>
+export BOSHInstanceIndex=<%= spec.index %>
+export BOSHInstanceAddress=<%= spec.address %>
+export BOSHInstanceNetwork=<% spec.networks %>
+
+JOB_NAME=<%= spec.name %>
+
+RUN_DIR=/var/vcap/sys/run/$JOB_NAME
+LOG_DIR=/var/vcap/sys/log/$JOB_NAME
+PIDFILE=$RUN_DIR/$JOB_NAME.pid
+
+mkdir -p $RUN_DIR $LOG_DIR
+chown -R vcap:vcap $RUN_DIR $LOG_DIR
+exec 1>> $LOG_DIR/$JOB_NAME.stdout.log
+exec 2>> $LOG_DIR/$JOB_NAME.stderr.log
+
+#Create the data folder, where InfluxDB will store data
+mkdir -p /var/vcap/store/influxdb
+chown -R vcap:vcap /var/vcap/store/influxdb
+
+
 # Daemon options
 INFLUXD_OPTS=
 
@@ -29,19 +53,19 @@ INFLUXD_OPTS=
 NAME=influxdb
 
 # User and group
-USER=influxdb
-GROUP=influxdb
+USER=vcap
+GROUP=vcap
 
 # Daemon name, where is the actual executable
 # If the daemon is not there, then exit.
-DAEMON=/usr/bin/influxd
+DAEMON=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influxd
 [ -x $DAEMON ] || exit 5
 
 # Configuration file
-CONFIG=/etc/influxdb/influxdb.conf
+CONFIG=/var/vcap/jobs/$JOB_NAME/config/influxdb.conf
 
 # PID file for the daemon
-PIDFILE=/var/run/influxdb/influxd.pid
+#PIDFILE=/var/run/influxdb/influxd.pid
 PIDDIR=`dirname $PIDFILE`
 if [ ! -d "$PIDDIR" ]; then
     mkdir -p $PIDDIR
@@ -56,21 +80,21 @@ if [ -r /lib/lsb/init-functions ]; then
 fi
 
 # Logging
-if [ -z "$STDOUT" ]; then
-    STDOUT=/dev/null
-fi
+#if [ -z "$STDOUT" ]; then
+#    STDOUT=/dev/null
+#fi
 
-if [ ! -f "$STDOUT" ]; then
-    mkdir -p $(dirname $STDOUT)
-fi
+#if [ ! -f "$STDOUT" ]; then
+#    mkdir -p $(dirname $STDOUT)
+#fi
 
-if [ -z "$STDERR" ]; then
-    STDERR=/var/log/influxdb/influxd.log
-fi
+#if [ -z "$STDERR" ]; then
+#    STDERR=/var/log/influxdb/influxd.log
+#fi
 
-if [ ! -f "$STDERR" ]; then
-    mkdir -p $(dirname $STDERR)
-fi
+#if [ ! -f "$STDERR" ]; then
+#    mkdir -p $(dirname $STDERR)
+#fi
 
 # Overwrite init script variables with /etc/default/influxdb values
 if [ -r $DEFAULT ]; then
@@ -161,9 +185,11 @@ function start() {
 
     log_success_msg "Starting the process" "$NAME"
     if which start-stop-daemon > /dev/null 2>&1; then
-        start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &
+#        start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &
+        start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS &
     else
-        su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &" $USER
+#        su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &" $USER
+        su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS  &" $USER
     fi
     log_success_msg "$NAME process was started"
 }

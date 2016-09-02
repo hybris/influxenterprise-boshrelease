@@ -8,6 +8,32 @@
 # Short-Description: Start the Influx-Enterprise service at boot time
 ### END INIT INFO
 
+
+#Some BOSH variable fro cluster testing
+export BOSHInstanceName=<%= spec.name %>
+export BOSHInstanceID=<%= spec.id %>
+export BOSHClusterLead=<% spec.bootstrap %>
+export BOSHInstanceIndex=<%= spec.index %>
+export BOSHInstanceAddress=<%= spec.address %>
+export BOSHInstanceNetwork=<% spec.networks %>
+
+JOB_NAME=<%= spec.name %>
+
+RUN_DIR=/var/vcap/sys/run/$JOB_NAME
+LOG_DIR=/var/vcap/sys/log/$JOB_NAME
+PIDFILE=$RUN_DIR/$JOB_NAME.pid
+
+mkdir -p $RUN_DIR $LOG_DIR
+chown -R vcap:vcap $RUN_DIR $LOG_DIR
+exec 1>> $LOG_DIR/$JOB_NAME.stdout.log
+exec 2>> $LOG_DIR/$JOB_NAME.stderr.log
+
+#Create the data folder, where InfluxDB will store data
+mkdir -p /var/vcap/store/influxdb
+chown -R vcap:vcap /var/vcap/store/influxdb
+
+
+
 # Script sleeps for START_TIMEOUT seconds after calling start to
 # validate the process started correctly
 START_TIMEOUT=2
@@ -18,7 +44,8 @@ SCRIPT="/usr/bin/influx-enterprise"
 SCRIPT_OPTS="run -c /etc/influx-enterprise/influx-enterprise.conf"
 
 # User to run the process under
-RUNAS=influx-enterprise
+RUNAS=vcap
+#RUNAS=influx-enterprise
 
 # PID file for process
 PIDFILE=/var/run/influx-enterprise.pid

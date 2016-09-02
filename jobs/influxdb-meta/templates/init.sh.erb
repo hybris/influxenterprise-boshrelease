@@ -22,6 +22,30 @@
 # any config file values. Example: "-join http://1.2.3.4:8086"
 DEFAULT=/etc/default/influxdb-meta
 
+#Some BOSH variable fro cluster testing
+export BOSHInstanceName=<%= spec.name %>
+export BOSHInstanceID=<%= spec.id %>
+export BOSHClusterLead=<% spec.bootstrap %>
+export BOSHInstanceIndex=<%= spec.index %>
+export BOSHInstanceAddress=<%= spec.address %>
+export BOSHInstanceNetwork=<% spec.networks %>
+
+JOB_NAME=<%= spec.name %>
+
+RUN_DIR=/var/vcap/sys/run/$JOB_NAME
+LOG_DIR=/var/vcap/sys/log/$JOB_NAME
+PIDFILE=$RUN_DIR/$JOB_NAME.pid
+
+mkdir -p $RUN_DIR $LOG_DIR
+chown -R vcap:vcap $RUN_DIR $LOG_DIR
+exec 1>> $LOG_DIR/$JOB_NAME.stdout.log
+exec 2>> $LOG_DIR/$JOB_NAME.stderr.log
+
+#Create the data folder, where InfluxDB will store data
+mkdir -p /var/vcap/store/influxdb
+chown -R vcap:vcap /var/vcap/store/influxdb
+
+
 # Daemon options
 INFLUXD_OPTS=
 
@@ -29,8 +53,8 @@ INFLUXD_OPTS=
 NAME=influxdb-meta
 
 # User and group
-USER=influxdb
-GROUP=influxdb
+USER=vcap
+GROUP=vcapß
 
 # Daemon name, where is the actual executable
 # If the daemon is not there, then exit.

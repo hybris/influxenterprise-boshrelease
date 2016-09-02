@@ -1,5 +1,5 @@
 check process influxd-meta
-  with pidfile /var/vcap/sys/run/influxdb/influxdb.pid
-  start program "/var/vcap/jobs/influxdb/bin/init.sh start" with timeout 60 seconds
-  stop program "/var/vcap/jobs/influxdb/bin/init.sh stop" with timeout 60 seconds
+  with pidfile /var/vcap/sys/run/influxdb-meta/influxdb-meta.pid
+  start program "/var/vcap/jobs/influxdb-meta/bin/init.sh start" with timeout 60 seconds
+  stop program "/var/vcap/jobs/influxdb-meta/bin/init.sh stop" with timeout 60 seconds
   group vcap

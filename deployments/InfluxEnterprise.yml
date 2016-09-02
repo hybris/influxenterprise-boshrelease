@@ -27,7 +27,7 @@ jobs:
         - 10.244.10.6
 - name: influxdb-web
   template: influxdb-web
-  instances: 3
+  instances: 1
   resource_pool: influx-resource-pool
   networks:
     - name: influx-network

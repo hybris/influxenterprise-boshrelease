@@ -1,0 +1,8 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+echo "Extracting Influx Meta Node..."
+dpkg -x influxdb/influxdb-meta_1.0.0-beta3-c1.0.0rc1_amd64.deb ./influx-meta
+
+echo "Preparing Influx Meta Node..."
+cp -a influx-meta/* ${BOSH_INSTALL_TARGET}

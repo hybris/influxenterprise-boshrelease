@@ -1,0 +1,8 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+echo "Extracting Influx Data Node..."
+dpkg -x influxdb/influxdb-data_1.0.0-beta3-c1.0.0rc1_amd64.deb ./influx-data
+
+echo "Preparing Influx Data Node..."
+cp -a influx-data/* ${BOSH_INSTALL_TARGET}

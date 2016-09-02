@@ -1,0 +1,8 @@
+/var/log/influx-enterprise/influx-enterprise.log {
+    daily
+    rotate 7
+    missingok
+    dateext
+    copytruncate
+    compress
+}

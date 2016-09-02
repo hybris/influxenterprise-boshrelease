@@ -1,0 +1,17 @@
+[Unit]
+Description=InfluxData's on-premise TICK stack management
+Documentation="https://influxdata.com"
+After=network-online.target
+
+[Service]
+User=influx-enterprise
+Group=influx-enterprise
+LimitNOFILE=65536
+EnvironmentFile=-/etc/default/influx-enterprise
+ExecStart=/usr/bin/influx-enterprise run -c /etc/influx-enterprise/influx-enterprise.conf
+KillMode=control-group
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+Alias=influx-enterprise.service

@@ -1,0 +1,8 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+echo "Extracting Influx Enterprise Web Node..."
+dpkg -x influxdb/influx-enterprise_1.0.0\~rc1_amd64.deb ./influx-enterprise
+
+echo "Preparing Influx Enterprise Web Node..."
+cp -a influx-enterprise/* ${BOSH_INSTALL_TARGET}

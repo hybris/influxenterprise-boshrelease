@@ -1,0 +1,33 @@
+---
+name: influxdb-data
+templates:
+  influxdb.conf.erb: config/influxdb.conf
+  init.sh: bin/init.sh
+
+packages:
+  - influxdb-data
+
+#properties:
+#  influxdb.adminport:
+#    description: Controls the availability of the built-in, web-based admin interface
+#    default: 666
+#    default: 8083
+#  influxdb.httpport:
+#    description: Controls how the HTTP endpoints are configured
+#    default: 999
+#    default: 8086
+  #influxdb.https-enabled:
+  #    description: Enable HTTPS
+  #  default: false
+#  influxdb.meta-dir:
+#    description: Where the metadata/raft database is stored
+#    default: /var/vcap/store/influxdb/meta
+#  influxdb.data-dir:
+#    description: Where the actual shard data for InfluxDB lives
+#    default: /var/vcap/store/influxdb/data
+#  influxdb.admin:
+#    description: Email address of server administrator
+#    default: webmaster@example.com
+#  influxdb.servername:
+#    description: Name of the virtual server
+#      default: 127.0.0.1

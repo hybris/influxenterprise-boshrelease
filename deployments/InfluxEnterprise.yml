@@ -1,0 +1,80 @@
+name: InfluxEnterprise
+director_uuid: <%= `bosh status --uuid` %>
+
+releases:
+- name: InfluxEnterprise
+  version: latest
+
+jobs:
+- name: influx-data
+  template: influx-data
+  instances: 2
+  resource_pool: influx-resource-pool
+  networks:
+    - name: influx-network
+      static_ips:
+        - 10.244.10.2
+        - 10.244.10.3
+- name: influx-meta
+  template: influx-meta
+  instances: 3
+  resource_pool: influx-resource-pool
+  networks:
+    - name: influx-network
+      static_ips:
+        - 10.244.10.4
+        - 10.244.10.5
+        - 10.244.10.6
+- name: influx-web
+  template: influx-web
+  instances: 3
+  resource_pool: influx-resource-pool
+  networks:
+    - name: influx-network
+      static_ips:
+        - 10.244.10.7
+
+resource_pools:
+- name: influx-resource-pool
+  network: influx-network
+  size: 1
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+  cloud_properties: {}
+#    name: random
+
+networks:
+- name: influx-network
+  type: manual
+  subnets:
+  - range: 10.244.10.0/24
+    gateway: 10.244.10.1
+    static:
+      - 10.244.10.2
+      - 10.244.10.3
+      - 10.244.10.4
+      - 10.244.10.5
+      - 10.244.10.6
+      - 10.244.10.7
+    cloud_properties: {}
+#      name: random
+
+compilation:
+  workers: 1
+  network: influx-network
+  reuse_compilation_vms: true
+  cloud_properties: {}
+#    name: random
+
+
+update:
+  canaries: 1
+  canary_watch_time: 30000-240000
+  update_watch_time: 30000-600000
+  max_in_flight: 3
+
+properties: {}
+  #influxdb:
+    #admin: foo@bar.com
+  #  servername: 10.244.1.2

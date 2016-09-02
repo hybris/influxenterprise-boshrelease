@@ -1,8 +1,8 @@
 ---
 name: influxdb-web
 templates:
-  influxdb.conf.erb: config/influxdb.conf
-  init.sh: bin/init.sh
+  influx-enterprise.conf.erb: config/influx-enterprise.conf
+  init.sh.erb: bin/init.sh
 
 packages:
   - influxdb-web

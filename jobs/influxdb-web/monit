@@ -1,4 +1,4 @@
-check process influxdb
+check process influx-enterprise
   with pidfile /var/vcap/sys/run/influxdb/influxdb.pid
   start program "/var/vcap/jobs/influxdb/bin/init.sh start" with timeout 60 seconds
   stop program "/var/vcap/jobs/influxdb/bin/init.sh stop" with timeout 60 seconds

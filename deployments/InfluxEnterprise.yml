@@ -6,8 +6,8 @@ releases:
   version: latest
 
 jobs:
-- name: influx-data
-  template: influx-data
+- name: influxdb-data
+  template: influxdb-data
   instances: 2
   resource_pool: influx-resource-pool
   networks:
@@ -15,8 +15,8 @@ jobs:
       static_ips:
         - 10.244.10.2
         - 10.244.10.3
-- name: influx-meta
-  template: influx-meta
+- name: influxdb-meta
+  template: influxdb-meta
   instances: 3
   resource_pool: influx-resource-pool
   networks:
@@ -25,8 +25,8 @@ jobs:
         - 10.244.10.4
         - 10.244.10.5
         - 10.244.10.6
-- name: influx-web
-  template: influx-web
+- name: influxdb-web
+  template: influxdb-web
   instances: 3
   resource_pool: influx-resource-pool
   networks:

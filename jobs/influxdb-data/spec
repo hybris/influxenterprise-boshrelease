@@ -2,7 +2,7 @@
 name: influxdb-data
 templates:
   influxdb.conf.erb: config/influxdb.conf
-  init.sh: bin/init.sh
+  init.sh.erb: bin/init.sh
 
 packages:
   - influxdb-data

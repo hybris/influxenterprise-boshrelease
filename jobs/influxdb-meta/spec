@@ -1,8 +1,8 @@
 ---
 name: influxdb-meta
 templates:
-  influxdb.conf.erb: config/influxdb.conf
-  init.sh: bin/init.sh
+  influxdb-meta.conf.erb: config/influxdb-meta.conf
+  init.sh.erb: bin/init.sh
 
 packages:
   - influxdb-meta

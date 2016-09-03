@@ -10,7 +10,7 @@ packages:
 properties:
   influxdb-data.licence-key:
     description: Licence key
-#    default: []
+    default: ""
   influxdb-data.licence-path:
     description: Path to licence if key not provided
 #    default: []

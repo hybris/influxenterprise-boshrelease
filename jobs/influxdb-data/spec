@@ -8,12 +8,12 @@ packages:
   - influxdb-data
 
 properties:
-#  influxdb-data.licence-key:
-#    description: Licence key
-#    default: somekey
-#  influxdb-data.licence-path:
-#    description: Path to licence if key not provided
-#    default: /papth/path
+  influxdb-data.licence-key:
+    description: Licence key
+    default: 
+  influxdb-data.licence-path:
+    description: Path to licence if key not provided
+    default:
   influxdb-data.data-dir:
     description: Data Dir
     default: /var/vcap/store/influxdb/data

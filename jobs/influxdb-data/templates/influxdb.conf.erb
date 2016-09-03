@@ -14,8 +14,8 @@ meta-tls-enabled = false
 [enterprise]
   registration-enabled = false
   registration-server-url = ""
-  license-key = ""
-  license-path = ""
+  license-key = "<%= p("influxdb-data.licence-key") %>"
+  license-path = "<%= p("influxdb-data.licence-path") %>"
 
 [meta]
   enabled = false
@@ -23,12 +23,12 @@ meta-tls-enabled = false
 
 [data]
   enabled = true
-  dir = "/var/lib/influxdb/data"
+  dir = "<%= p("influxdb-data.data-dir") %>"
   engine = "tsm1"
   max-wal-size = 104857600
   wal-flush-interval = "10m0s"
   wal-partition-flush-delay = "2s"
-  wal-dir = "/var/lib/influxdb/wal"
+  wal-dir = "<%= p("influxdb-data.wal-dir") %>"
   wal-logging-enabled = true
   wal-ready-series-size = 30720
   wal-compaction-threshold = 0.5
@@ -61,9 +61,10 @@ meta-tls-enabled = false
 
 [admin]
   enabled = true
-  bind-address = ":8083"
-  https-enabled = false
-  https-certificate = "/etc/ssl/influxdb.pem"
+  bind-address = "<%= p("influxdb-data.adminport") %>"
+  https-enabled = :<%= p("influxdb-data.https-enabled") %>
+  https-certificate = "<%= p("influxdb-data.pem-path") %>"
+
 
 [monitor]
   store-enabled = true
@@ -75,13 +76,13 @@ meta-tls-enabled = false
 
 [http]
   enabled = true
-  bind-address = ":8086"
+  bind-address = ":<%= p("influxdb-data.http-port") %>"
   auth-enabled = false
   log-enabled = true
   write-tracing = false
   pprof-enabled = false
   https-enabled = false
-  https-certificate = "/etc/ssl/influxdb.pem"
+  https-certificate = "<%= p("influxdb-data.pem-path") %>"
   json-write-enabled = false
 
 [[graphite]]
@@ -146,4 +147,3 @@ meta-tls-enabled = false
   retry-interval = "1s"
   retry-max-interval = "1m0s"
   purge-interval = "1h0m0s"
-

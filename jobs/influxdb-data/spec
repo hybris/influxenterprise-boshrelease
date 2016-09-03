@@ -13,7 +13,7 @@ properties:
     default: ""
   influxdb-data.licence-path:
     description: Path to licence if key not provided
-#    default: []
+    default: ""
   influxdb-data.data-dir:
     description: Data Dir
     default: /var/vcap/store/influxdb/data

@@ -8,7 +8,7 @@ releases:
 jobs:
 - name: influxdb-data
   template: influxdb-data
-  instances: 2
+  instances: 0
   resource_pool: influx-resource-pool
   networks:
     - name: influx-network

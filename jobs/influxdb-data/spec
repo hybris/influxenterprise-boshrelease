@@ -20,6 +20,12 @@ properties:
   influxdb-data.wal-dir:
     description: Wal Dir
     default: /var/vcap/store/influxdb/wal
+  influxdb-data.meta-dir:
+    description: meta Dir
+    default: /var/vcap/store/influxdb/meta
+  influxdb-data.hh-dir:
+    description: hh Dir
+    default: /var/vcap/store/influxdb/hh
   influxdb-data.adminport:
     description: web-based admin interface
     default: 8083

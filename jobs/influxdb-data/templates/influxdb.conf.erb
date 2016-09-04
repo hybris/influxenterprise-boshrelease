@@ -19,7 +19,7 @@ meta-tls-enabled = false
 
 [meta]
   enabled = false
-  dir = "/var/lib/influxdb/meta"
+  dir = "<%= p("influxdb-data.meta-dir") %>"
 
 [data]
   enabled = true
@@ -140,7 +140,7 @@ meta-tls-enabled = false
 
 [hinted-handoff]
   enabled = true
-  dir = "/var/lib/influxdb/hh"
+  dir = "<%= p("influxdb-data.hh-dir") %>"
   max-size = 1073741824
   max-age = "168h0m0s"
   retry-rate-limit = 0

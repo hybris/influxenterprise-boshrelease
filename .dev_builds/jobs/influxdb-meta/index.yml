@@ -6,4 +6,7 @@ builds:
   f58d393d7c3581d6f36e0f4bd6a61e2896ec5191:
     version: f58d393d7c3581d6f36e0f4bd6a61e2896ec5191
     sha1: 0cfd7c9ceb406ecfc130bb6c9b1efd823b3d01ee
+  1cc7af59efbfcd6dc5de05431ae4850bda7cb83d:
+    version: 1cc7af59efbfcd6dc5de05431ae4850bda7cb83d
+    sha1: 216e0da6e70d5af452c6e0c3a1bcf5141f4b7aa3
 format-version: '2'

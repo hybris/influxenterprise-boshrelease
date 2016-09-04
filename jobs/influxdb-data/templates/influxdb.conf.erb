@@ -61,8 +61,8 @@ meta-tls-enabled = false
 
 [admin]
   enabled = true
-  bind-address = "<%= p("influxdb-data.adminport") %>"
-  https-enabled = :<%= p("influxdb-data.https-enabled") %>
+  bind-address = ":<%= p("influxdb-data.adminport") %>"
+  https-enabled = <%= p("influxdb-data.https-enabled") %>
   https-certificate = "<%= p("influxdb-data.pem-path") %>"
 
 

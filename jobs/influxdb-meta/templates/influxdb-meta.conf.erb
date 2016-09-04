@@ -5,15 +5,15 @@ hostname = ""
 [enterprise]
   registration-enabled = false
   registration-server-url = ""
-  license-key = ""
-  license-path = ""
+  license-key = "<%= p("influxdb-meta.licence-key") %>"
+  license-path = "<%= p("influxdb-meta.licence-path") %>"
 
 [meta]
-  dir = "/var/lib/influxdb/meta"
-  bind-address = ":8089"
-  http-bind-address = ":8091"
-  https-enabled = false
-  https-certificate = ""
+  dir = "<%= p("influxdb-meta.meta-dir") %>"
+  bind-address = ":<%= p("influxdb-meta.metaport") %>"
+  http-bind-address = ":<%= p("influxdb-meta.http-port") %>"
+  https-enabled = <%= p("influxdb-meta.https-enabled") %>
+  https-certificate = "<%= p("influxdb-meta.pem-path") %>"
   gossip-frequency = "5s"
   announcement-expiration = "30s"
   retention-autocreate = true

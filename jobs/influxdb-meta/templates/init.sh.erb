@@ -58,14 +58,14 @@ GROUP=vcapß
 
 # Daemon name, where is the actual executable
 # If the daemon is not there, then exit.
-DAEMON=/usr/bin/influxd-meta
+DAEMON=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influxd-meta
 [ -x $DAEMON ] || exit 5
 
 # Configuration file
-CONFIG=/etc/influxdb/influxdb-meta.conf
+CONFIG=/var/vcap/jobs/$JOB_NAME/config/influxdb-meta.conf
 
 # PID file for the daemon
-PIDFILE=/var/run/influxdb-meta/influxdb-meta.pid
+#PIDFILE=/var/run/influxdb-meta/influxdb-meta.pid
 PIDDIR=`dirname $PIDFILE`
 if [ ! -d "$PIDDIR" ]; then
     mkdir -p $PIDDIR
@@ -80,21 +80,21 @@ if [ -r /lib/lsb/init-functions ]; then
 fi
 
 # Logging
-if [ -z "$STDOUT" ]; then
-    STDOUT=/dev/null
-fi
+#if [ -z "$STDOUT" ]; then
+#    STDOUT=/dev/null
+#fi
 
-if [ ! -f "$STDOUT" ]; then
-    mkdir -p $(dirname $STDOUT)
-fi
+#if [ ! -f "$STDOUT" ]; then
+#    mkdir -p $(dirname $STDOUT)
+#fi
 
-if [ -z "$STDERR" ]; then
-    STDERR=/var/log/influxdb/influxdb-meta.log
-fi
+#if [ -z "$STDERR" ]; then
+#    STDERR=/var/log/influxdb/influxdb-meta.log
+#fi
 
-if [ ! -f "$STDERR" ]; then
-    mkdir -p $(dirname $STDERR)
-fi
+#if [ ! -f "$STDERR" ]; then
+#    mkdir -p $(dirname $STDERR)
+#fi
 
 # Overwrite init script variables with /etc/default/influxdb-meta values
 if [ -r $DEFAULT ]; then
@@ -186,9 +186,11 @@ case $1 in
 
         log_success_msg "Starting the process" "$NAME"
         if which start-stop-daemon > /dev/null 2>&1; then
-            start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &
+            #start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &
+            start-stop-daemon --chuid $GROUP:$USER --start --quiet --pidfile $PIDFILE --exec $DAEMON -- -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS &
         else
-            su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &" $USER
+            #su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS >>$STDOUT 2>>$STDERR &" $USER
+            su -s /bin/sh -c "nohup $DAEMON -pidfile $PIDFILE -config $CONFIG $INFLUXD_OPTS &" $USER
         fi
         log_success_msg "$NAME process was started"
         ;;

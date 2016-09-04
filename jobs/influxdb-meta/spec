@@ -7,27 +7,25 @@ templates:
 packages:
   - influxdb-meta
 
-#properties:
-#  influxdb.adminport:
-#    description: Controls the availability of the built-in, web-based admin interface
-#    default: 666
-#    default: 8083
-#  influxdb.httpport:
-#    description: Controls how the HTTP endpoints are configured
-#    default: 999
-#    default: 8086
-  #influxdb.https-enabled:
-  #    description: Enable HTTPS
-  #  default: false
-#  influxdb.meta-dir:
-#    description: Where the metadata/raft database is stored
-#    default: /var/vcap/store/influxdb/meta
-#  influxdb.data-dir:
-#    description: Where the actual shard data for InfluxDB lives
-#    default: /var/vcap/store/influxdb/data
-#  influxdb.admin:
-#    description: Email address of server administrator
-#    default: webmaster@example.com
-#  influxdb.servername:
-#    description: Name of the virtual server
-#      default: 127.0.0.1
+properties:
+  influxdb-meta.licence-key:
+    description: Licence key
+    default: ""
+  influxdb-meta.licence-path:
+    description: Path to licence if key not provided
+    default: ""
+  influxdb-meta.meta-dir:
+    description: meta Dir
+    default: /var/vcap/store/influxdb/meta
+  influxdb-meta.metaport:
+    description: meta bind interface
+    default: 8089
+  influxdb-meta.http-port:
+    description: Controls how the HTTP endpoints are configured
+    default: 8091
+  influxdb-meta.https-enabled:
+    description: Enable HTTPS
+    default: false
+  influxdb-meta.pem-path:
+    description: SSL pem path
+    default: /etc/ssl/influxdb.pem

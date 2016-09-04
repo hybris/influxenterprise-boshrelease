@@ -15,16 +15,16 @@ jobs:
 #      static_ips:
 #        - 10.244.10.2
 #        - 10.244.10.3
-- name: influxdb-meta
-  template: influxdb-meta
-  instances: 3
-  resource_pool: influx-resource-pool
-  networks:
-    - name: influx-network
-      static_ips:
-        - 10.244.10.4
-        - 10.244.10.5
-        - 10.244.10.6
+#- name: influxdb-meta
+#  template: influxdb-meta
+#  instances: 3
+#  resource_pool: influx-resource-pool
+#  networks:
+#    - name: influx-network
+#      static_ips:
+#        - 10.244.10.4
+#        - 10.244.10.5
+#        - 10.244.10.6
 - name: influxdb-web
   template: influxdb-web
   instances: 1

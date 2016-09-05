@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e -x
+
 ### BEGIN INIT INFO
 # Provides:          influx-enterprise
 # Required-Start:    $local_fs $network $named $time $syslog
@@ -39,19 +41,19 @@ chown -R vcap:vcap /var/vcap/store/influxdb
 START_TIMEOUT=2
 
 # Script to execute when starting
-SCRIPT="/usr/bin/influx-enterprise"
+SCRIPT="/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influx-enterprise"
 # Options to pass to the script on startup
-SCRIPT_OPTS="run -c /etc/influx-enterprise/influx-enterprise.conf"
+SCRIPT_OPTS="run -c /var/vcap/jobs/$JOB_NAME/config/influx-enterprise.conf"
 
 # User to run the process under
 RUNAS=vcap
 #RUNAS=influx-enterprise
 
 # PID file for process
-PIDFILE=/var/run/influx-enterprise.pid
+#PIDFILE=/var/run/influx-enterprise.pid
 # Where to redirect logging to
-LOGFILE=/var/log/influx-enterprise/influx-enterprise.log
-ERRLOGFILE=/var/log/influx-enterprise/influx-enterprise.log
+#LOGFILE=/var/log/influx-enterprise/influx-enterprise.log
+#ERRLOGFILE=/var/log/influx-enterprise/influx-enterprise.log
 
 start() {
     if [[ -f $PIDFILE ]]; then

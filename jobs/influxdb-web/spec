@@ -7,27 +7,34 @@ templates:
 packages:
   - influxdb-web
 
-#properties:
-#  influxdb.adminport:
-#    description: Controls the availability of the built-in, web-based admin interface
-#    default: 666
-#    default: 8083
-#  influxdb.httpport:
-#    description: Controls how the HTTP endpoints are configured
-#    default: 999
-#    default: 8086
-  #influxdb.https-enabled:
-  #    description: Enable HTTPS
-  #  default: false
-#  influxdb.meta-dir:
-#    description: Where the metadata/raft database is stored
-#    default: /var/vcap/store/influxdb/meta
-#  influxdb.data-dir:
-#    description: Where the actual shard data for InfluxDB lives
-#    default: /var/vcap/store/influxdb/data
-#  influxdb.admin:
-#    description: Email address of server administrator
-#    default: webmaster@example.com
-#  influxdb.servername:
-#    description: Name of the virtual server
-#      default: 127.0.0.1
+properties:
+  influxdb-web.prettyurl:
+    description: This the "pretty" URL that end users will see for this app
+    default: http://127.0.0.1:3000
+  influxdb-web.hostname:
+    description: This is the host and port you want to bind the application to
+    default: hlocalhost
+  influxdb-web.port:
+    description: This is the host and port you want to bind the application to
+    default: 3000
+  influxdb-web.license-key:
+    description: You need either a license key or a license file to run Enterprise Web
+    default: ""
+  influxdb-web.license-file:
+    description: You need either a license key or a license file to run Enterprise Web
+    default: "/path/to/license"
+  influxdb-web.shared-secret:
+    description: The "shared-secret" let's us authenticate users between Enterprise Web and Enterprise
+    default: "long pass phrase used for signing tokens"
+  influxdb-web.smtp-host:
+    description: SMTP hostname
+    default: localhost
+  influxdb-web.smtp-port:
+    description: SMTP server port
+    default: 25
+  influxdb-web.smtp-fromemail:
+    description: SMTP sender email
+    default: donotreply@example.com
+  influxdb-web.database:
+    description: Where is your database? # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
+    default: sqlite3:///var/lib/influx-enterprise/enterprise.db"

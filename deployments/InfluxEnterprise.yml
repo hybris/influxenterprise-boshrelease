@@ -75,13 +75,13 @@ update:
   max_in_flight: 3
 
 properties: # {}
-  influxdbcluster:
-    influxdb-data-1: 10.244.10.2
-    influxdb-data-2: 10.244.10.3
-    influxdb-meta-1: 10.244.10.4
-    influxdb-meta-2: 10.244.10.5
-    influxdb-meta-3: 10.244.10.6
-    influxdb-web:    10.244.10.7
+  influxdb-web: &IPs
+    - influxdb-data-1: 10.244.10.2
+    - influxdb-data-2: 10.244.10.3
+    - influxdb-meta-1: 10.244.10.4
+    - influxdb-meta-2: 10.244.10.5
+    - influxdb-meta-3: 10.244.10.6
+    - influxdb-web:    10.244.10.7
 
   #influxdb:
     #admin: foo@bar.com

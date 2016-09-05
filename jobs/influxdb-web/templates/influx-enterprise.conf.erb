@@ -2,12 +2,12 @@
 url = "<%= p("influxdb-web.prettyurl") %>" # ENV: URL
 
 # This is the host and port you want to bind the application to.
-hostname = "<%= p("influxdb-web.url") %>" # ENV: HOSTNAME
-port = "<%= p("influxdb-web.url") %>" # ENV: PORT
+hostname = "<%= p("influxdb-web.hostname") %>" # ENV: HOSTNAME
+port = "<%= p("influxdb-web.port") %>" # ENV: PORT
 
 # You need either a license key or a license file to run Enterprise Web
-license-key = "<%= p("influxdb-web.url") %>" # ENV: LICENSE_KEY
-license-file = "<%= p("influxdb-web.url") %>" # ENV: LICENSE_FILE
+license-key = "<%= p("influxdb-web.license-key") %>" # ENV: LICENSE_KEY
+license-file = "<%= p("influxdb-web.license-file") %>" # ENV: LICENSE_FILE
 
 [influxdb]
 # The "shared-secret" let's us authenticate users between Enterprise Web

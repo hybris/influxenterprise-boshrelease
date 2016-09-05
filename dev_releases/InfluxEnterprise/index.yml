@@ -82,4 +82,6 @@ builds:
     version: 0+dev.40
   80affa5c-bb4c-450d-a156-7b2b733e288c:
     version: 0+dev.41
+  3460da9e-7254-4279-bd1c-cae2c255e499:
+    version: 0+dev.42
 format-version: '2'

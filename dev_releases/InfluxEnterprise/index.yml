@@ -62,4 +62,6 @@ builds:
     version: 0+dev.30
   '0478f6c2-31ef-4463-bec2-d6b64ed1c146':
     version: 0+dev.31
+  abdcc754-abbc-4b09-b791-6726f3c0df51:
+    version: 0+dev.32
 format-version: '2'

@@ -75,7 +75,7 @@ update:
   max_in_flight: 3
 
 properties: # {}
-  influxdb-web: &IPs
+  influxdbcluster: &IPs
     influxdb-data-1: 10.244.10.2
     influxdb-data-2: 10.244.10.3
     influxdb-meta-1: 10.244.10.4

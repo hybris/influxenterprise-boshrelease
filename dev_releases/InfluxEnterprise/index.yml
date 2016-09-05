@@ -88,4 +88,6 @@ builds:
     version: 0+dev.43
   e68c770c-75e4-47e7-888f-664d7a3969c7:
     version: 0+dev.44
+  926f4759-dcbe-4f45-bdfc-d4fdf6d1f98f:
+    version: 0+dev.45
 format-version: '2'

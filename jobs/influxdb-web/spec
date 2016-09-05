@@ -34,7 +34,7 @@ properties:
     default: 25
   influxdb-web.smtp-fromemail:
     description: SMTP sender email
-    default: donotreply@example.com
+    default: idefix@sap.com
   influxdb-web.database:
     description: Where is your database? # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
-    default: sqlite3:///var/lib/influx-enterprise/enterprise.db"
+    default: sqlite3:///var/lib/influx-enterprise/enterprise.db

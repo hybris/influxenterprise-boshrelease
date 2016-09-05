@@ -3,7 +3,7 @@ name: influxdb-data
 templates:
   influxdb.conf.erb: config/influxdb.conf
   init.sh.erb: bin/init.sh
-  etc.hosts.erb: /etc/hosts
+  pre-start.erb: bin/pre-start
 
 packages:
   - influxdb-data
@@ -39,3 +39,12 @@ properties:
   influxdb-data.http-port:
     description: Controls how the HTTP endpoints are configured
     default: 8086
+  influxdbcluster.influxdb-data:
+    description: test
+    default: []
+  influxdbcluster.influxdb-meta:
+    description: test
+    default: []
+  influxdbcluster.influxdb-web:
+    description: test
+    default:

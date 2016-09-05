@@ -4,7 +4,7 @@ templates:
   influx-enterprise.conf.erb: config/influx-enterprise.conf
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
-  etc.hosts.erb: config/hosts
+
 
 packages:
   - influxdb-web
@@ -48,4 +48,4 @@ properties:
     default: []
   influxdbcluster.influxdb-web:
     description: test
-    default: 
+    default:

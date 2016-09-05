@@ -3,6 +3,7 @@ name: influxdb-meta
 templates:
   influxdb-meta.conf.erb: config/influxdb-meta.conf
   init.sh.erb: bin/init.sh
+  etc.hosts.erb: /etc/hosts
 
 packages:
   - influxdb-meta

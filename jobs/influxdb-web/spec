@@ -3,6 +3,7 @@ name: influxdb-web
 templates:
   influx-enterprise.conf.erb: config/influx-enterprise.conf
   init.sh.erb: bin/init.sh
+  etc.hosts.erb: /etc/hosts
 
 packages:
   - influxdb-web

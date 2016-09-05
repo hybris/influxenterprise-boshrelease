@@ -3,6 +3,7 @@ name: influxdb-data
 templates:
   influxdb.conf.erb: config/influxdb.conf
   init.sh.erb: bin/init.sh
+  etc.hosts.erb: /etc/hosts
 
 packages:
   - influxdb-data

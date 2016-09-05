@@ -1,6 +1,20 @@
 #!/bin/bash
 set -e -x
 
-pwd 
+pwd
+
+
+
+cat << 'EOF' > /etc/hosts
+<% p("influxdbcluster.influxdb-data").each_index do |i| %>
+<%= p("influxdbcluster.influxdb-data")[i] %> influxdb-data-<%= i+1%>
+<% end %>
+<% p("influxdbcluster.influxdb-meta").each_index do |i| %>
+<%= p("influxdbcluster.influxdb-meta")[i] %> influxdb-meta-<%= i+1%>
+<% end %>
+<%= p("influxdbcluster.influxdb-web") %>" influxdb-web
+EOF
+
+
 cp -a config/hosts /etc/hosts
 chmod 644 /etc/hosts

@@ -4,7 +4,7 @@ templates:
   influxdb-meta.conf.erb: config/influxdb-meta.conf
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
-  
+
 packages:
   - influxdb-meta
 
@@ -30,3 +30,12 @@ properties:
   influxdb-meta.pem-path:
     description: SSL pem path
     default: /etc/ssl/influxdb.pem
+  influxdbcluster.influxdb-data:
+    description: test
+    default: []
+  influxdbcluster.influxdb-meta:
+    description: test
+    default: []
+  influxdbcluster.influxdb-web:
+    description: test
+    default:

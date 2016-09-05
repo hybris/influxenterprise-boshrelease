@@ -64,7 +64,9 @@ start() {
             return 0
         fi
     fi
-    local CMD="$SCRIPT $SCRIPT_OPTS 1>> \"$LOGFILE\" 2>> \"$ERRLOGFILE\" & echo \$!"
+    #local CMD="$SCRIPT $SCRIPT_OPTS 1>> \"$LOGFILE\" 2>> \"$ERRLOGFILE\" & echo \$!"
+    local CMD="$SCRIPT $SCRIPT_OPTS & echo \$!"
+
     su -s /bin/sh -c "$CMD" $RUNAS > "$PIDFILE"
     sleep $START_TIMEOUT
     if [[ -f $PIDFILE ]]; then

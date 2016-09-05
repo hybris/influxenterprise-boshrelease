@@ -1,6 +1,5 @@
 check process influx-enterprise
-  with pidfile /var/vcap/sys/run/influx-enterprise/influx-enterprise.pid
-  start program "/var/vcap/jobs/influx-web/bin/init.sh start" with timeout 60 seconds
-  stop program "/var/vcap/jobs/influx-web/bin/init.sh stop" with timeout 60 seconds
+  with pidfile /var/vcap/sys/run/influxdb-web/influxdb-web.pid
+  start program "/var/vcap/jobs/influxdb-web/bin/init.sh start" with timeout 60 seconds
+  stop program "/var/vcap/jobs/influxdb-web/bin/init.sh stop" with timeout 60 seconds
   group vcap
- 

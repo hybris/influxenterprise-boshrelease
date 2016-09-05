@@ -52,4 +52,6 @@ builds:
     version: 0+dev.25
   5e55497f-5790-4c4b-b27b-9d1726cc486f:
     version: 0+dev.26
+  cd24556b-49be-4c01-a794-07af1742df07:
+    version: 0+dev.27
 format-version: '2'

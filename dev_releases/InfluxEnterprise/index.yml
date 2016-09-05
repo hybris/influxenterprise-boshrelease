@@ -102,4 +102,6 @@ builds:
     version: 0+dev.50
   156c18f2-9805-458d-b8ff-93e15d3dc6cf:
     version: 0+dev.51
+  ac24195a-8acc-41aa-8804-7e8c701f95ae:
+    version: 0+dev.52
 format-version: '2'

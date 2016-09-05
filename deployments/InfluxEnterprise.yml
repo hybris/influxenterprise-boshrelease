@@ -74,7 +74,7 @@ update:
   update_watch_time: 30000-600000
   max_in_flight: 3
 
-properties: 
+properties:
   influxdbcluster:
     influxdb-data:
       - 10.244.10.2
@@ -83,8 +83,7 @@ properties:
       - 10.244.10.4
       - 10.244.10.5
       - 10.244.10.6
-    influxdb-web:
-      - 10.244.10.7
+    influxdb-web: 10.244.10.7
 
   #influxdb:
     #admin: foo@bar.com

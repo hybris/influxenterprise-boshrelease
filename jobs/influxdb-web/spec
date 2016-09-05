@@ -48,4 +48,4 @@ properties:
     default: []
   influxdbcluster.influxdb-web:
     description: test
-    default: []
+    default: 

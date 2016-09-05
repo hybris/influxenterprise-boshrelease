@@ -45,4 +45,7 @@ builds:
   b7073cd5bd103ebc2b191283797f447f460d5087:
     version: b7073cd5bd103ebc2b191283797f447f460d5087
     sha1: b4f63c0e53d340b87edd98165c68eed41d1bdecc
+  2f2c3e011bb1e8c777f7d473033fd4e8639c8f4d:
+    version: 2f2c3e011bb1e8c777f7d473033fd4e8639c8f4d
+    sha1: 0c3feb466b38046c5debd06e51befb252e3e9b1a
 format-version: '2'

@@ -1,0 +1,21 @@
+jobs:
+- (( merge ))
+- name: build-task-image
+  public: true
+  serial: true
+  plan:
+  - get: pipeline-repo
+    trigger: false
+  - put: docker-image
+    params:
+      build: pipeline-repo/ci_image
+
+- name: build-task-image-alpine
+  public: true
+  serial: true
+  plan:
+  - get: pipeline-repo
+    trigger: false
+  - put: docker-image
+    params:
+      build: pipeline-repo/ci_image_alpine

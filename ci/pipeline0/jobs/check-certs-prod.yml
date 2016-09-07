@@ -1,0 +1,25 @@
+jobs:
+- (( merge ))
+- name: check-certs-prod
+  public: true
+  serial: true
+  plan:
+  - get: pipeline-repo
+    trigger: true
+  - get: daily-trigger
+    trigger: true
+  - task: check-certs
+    file: pipeline-repo/pipeline/tasks/check-certs.yml
+    params:
+      CERTS_TO_CHECK: >
+        cf-public-elb-1505606071.us-east-1.elb.amazonaws.com:443,
+        cf-public-elb-2-361321464.us-east-1.elb.amazonaws.com:443,
+        yaas-io-210420928.us-east-1.elb.amazonaws.com:443,
+        cf-public-elb-tools-1849865871.us-east-1.elb.amazonaws.com:443,
+        internal-cf-internal-internal-elb-198926687.us-east-1.elb.amazonaws.com:443,
+        internal-internal-yaas-io-1105079924.us-east-1.elb.amazonaws.com:443,
+        public-logging-elb-2123889839.us-east-1.elb.amazonaws.com:443,
+        internal-internal-logging-elb-2106598652.us-east-1.elb.amazonaws.com:443,
+        doc-hybris-1077735193.us-east-1.elb.amazonaws.com:443
+      VO_API_KEY: {{vo-api-key}}
+      VO_ROUTING_KEY: idefix

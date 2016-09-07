@@ -1,0 +1,16 @@
+groups:
+- name: check-cf
+  jobs:
+  - check-certs-stage
+  - check-certs-prod
+  - check-yaas-io
+
+- name: ci_image
+  jobs:
+  - build-task-image
+  - build-task-image-alpine
+
+- name: snapshots
+  jobs:
+  - Idefix-remove-old-snapshots
+  - Tollans-remove-old-snapshots

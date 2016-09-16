@@ -21,6 +21,6 @@ tmp
 
 ci/bin/update_pipeline_local.sh
 src/influxdb/*.deb
-src/influxdb/influxdb*/
+#src/influxdb/influxdb*/
 
 my*.yml

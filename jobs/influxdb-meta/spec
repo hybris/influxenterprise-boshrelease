@@ -4,7 +4,7 @@ templates:
   influxdb-meta.conf.erb: config/influxdb-meta.conf
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
-#  post-start.erb: bin/post-start
+  post-start.erb: bin/post-start
 
 packages:
   - influxdb-meta

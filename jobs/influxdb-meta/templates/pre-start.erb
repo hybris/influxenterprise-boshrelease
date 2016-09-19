@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e -x
-
+exit
 cat << EOF >> /etc/hosts
 <% p("influxdbcluster.influxdb-data").each_index do |i| %>
 <%= p("influxdbcluster.influxdb-data")[i] %> influxdb-data-<%= i %>

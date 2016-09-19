@@ -51,4 +51,7 @@ builds:
   81e8cddba75d3efebb95593250180da12ce3be6a:
     version: 81e8cddba75d3efebb95593250180da12ce3be6a
     sha1: 1837bdfc49f317d426c1765a8d0a7c92dae29511
+  365cada9f479ca491066a6b2ed27f8a9daecae5f:
+    version: 365cada9f479ca491066a6b2ed27f8a9daecae5f
+    sha1: 6d89a0be802f2094d91ac32e833e44653be12e63
 format-version: '2'

@@ -89,7 +89,3 @@ properties:
       - 10.244.10.5
       - 10.244.10.6
     influxdb-web: 10.244.10.7
-
-  #influxdb:
-    #admin: foo@bar.com
-  #  servername: 10.244.1.2

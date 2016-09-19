@@ -39,4 +39,7 @@ builds:
   64c336fe6cad596c8950b756e1d7c0db8bd7adba:
     version: 64c336fe6cad596c8950b756e1d7c0db8bd7adba
     sha1: 71ce7e29a90924c7ee74f42a5d1cd12670155e8d
+  4a63b569c78694c5be37fe3e09256dc90e312e9c:
+    version: 4a63b569c78694c5be37fe3e09256dc90e312e9c
+    sha1: a13600a6b108368b4bef329d3ca7db3939caa425
 format-version: '2'

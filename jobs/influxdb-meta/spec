@@ -12,7 +12,7 @@ packages:
 properties:
   influxdb.license-key:
     description: License key
-  influxdb-meta.licence-path:
+  influxdb-meta.license-path:
     description: Path to licence if key not provided
     default: ""
   influxdb-meta.meta-dir:

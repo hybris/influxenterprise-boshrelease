@@ -41,7 +41,7 @@ chown -R vcap:vcap /var/vcap/store/influxdb
 START_TIMEOUT=2
 
 # Script to execute when starting
-SCRIPT="/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influx-enterprise"
+SCRIPT="/var/vcap/packages/$JOB_NAME/usr/bin/influx-enterprise"
 # Options to pass to the script on startup
 SCRIPT_OPTS="run -c /var/vcap/jobs/$JOB_NAME/config/influx-enterprise.conf"
 

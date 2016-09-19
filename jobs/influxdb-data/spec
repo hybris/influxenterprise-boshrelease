@@ -9,11 +9,12 @@ packages:
   - influxdb-data
 
 properties:
-  influxdb-data.licence-key:
-    description: Licence key
-    default: ""
-  influxdb-data.licence-path:
-    description: Path to licence if key not provided
+  influxdb.shared-secret:
+    description: Long pass phrase that will be used to sign tokens
+  influxdb.license-key:
+    description: License key
+  influxdb-data.license-path:
+    description: Path to license if key not provided
     default: ""
   influxdb-data.data-dir:
     description: Data Dir
@@ -40,11 +41,11 @@ properties:
     description: Controls how the HTTP endpoints are configured
     default: 8086
   influxdbcluster.influxdb-data:
-    description: test
+    description: list of ips of data nodes in the cluster
     default: []
   influxdbcluster.influxdb-meta:
-    description: test
+    description: list of ips of meta nodes in the cluster
     default: []
   influxdbcluster.influxdb-web:
-    description: test
-    default:
+    description: list of ip of the web console in the cluster
+    default: []

@@ -19,15 +19,13 @@ properties:
   influxdb-web.port:
     description: This is the host and port you want to bind the application to
     default: 3000
-  influxdb-web.license-key:
+  influxdb.license-key:
     description: You need either a license key or a license file to run Enterprise Web
-    default: ""
   influxdb-web.license-file:
     description: You need either a license key or a license file to run Enterprise Web
     default: "/path/to/license"
-  influxdb-web.shared-secret:
+  influxdb.shared-secret:
     description: The "shared-secret" let's us authenticate users between Enterprise Web and Enterprise
-    default: "long pass phrase used for signing tokens"
   influxdb-web.smtp-host:
     description: SMTP hostname
     default: localhost
@@ -39,13 +37,13 @@ properties:
     default: idefix@sap.com
   influxdb-web.database:
     description: Where is your database? # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
-    default: sqlite3:///var/lib/influx-enterprise/enterprise.db
+    default: sqlite3:///var/vcap/store/influxdb/enterprise.db
   influxdbcluster.influxdb-data:
-    description: test
+    description: list of ips of data nodes in the cluster
     default: []
   influxdbcluster.influxdb-meta:
-    description: test
+    description: list of ips of meta nodes in the cluster
     default: []
   influxdbcluster.influxdb-web:
-    description: test
-    default:
+    description: list of ip of the web console in the cluster
+    default: []

@@ -5,6 +5,7 @@ releases/**/*.tgz
 release
 dev_releases
 blobs/*
+influxdb/
 .blobs
 .dev_builds
 .vagrant

@@ -58,7 +58,7 @@ GROUP=vcap
 
 # Daemon name, where is the actual executable
 # If the daemon is not there, then exit.
-DAEMON=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influxd-meta
+DAEMON=/var/vcap/packages/$JOB_NAME/usr/bin/influxd-meta
 [ -x $DAEMON ] || exit 5
 
 # Configuration file

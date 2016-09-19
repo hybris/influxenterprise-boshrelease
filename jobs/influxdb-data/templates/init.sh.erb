@@ -22,7 +22,7 @@
 # any config file values. Example: "-join http://1.2.3.4:8086"
 DEFAULT=/etc/default/influxdb
 
-#Some BOSH variable fro cluster testing
+#Some BOSH variable from cluster testing
 export BOSHInstanceName=<%= spec.name %>
 export BOSHInstanceID=<%= spec.id %>
 export BOSHClusterLead=<% spec.bootstrap %>
@@ -58,7 +58,7 @@ GROUP=vcap
 
 # Daemon name, where is the actual executable
 # If the daemon is not there, then exit.
-DAEMON=/var/vcap/jobs/$JOB_NAME/packages/$JOB_NAME/usr/bin/influxd
+DAEMON=/var/vcap/packages/$JOB_NAME/usr/bin/influxd
 [ -x $DAEMON ] || exit 5
 
 # Configuration file

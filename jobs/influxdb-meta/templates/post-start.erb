@@ -3,21 +3,18 @@ set -e -x
 
 #Here to implement the loop that will check via ping all the cluster meta nodes are up and running before the join command is issued.
 
-JOB_NAME=<%= spec.name %>
-
 #following to be onlu run on meta node 1, so if needs to be implemented
 <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
-/var/vcap/jobs/${JOB_NANE}/packages/${JOB_NAME}/usr/bin/influxd-ctl join influxdb-meta-<%= i+1 %>:8091
+/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
 <% end %>
 
-
 # following to check if the nodes are joined, this could be imlementd somehow with monit
-/var/vcap/jobs/${JOB_NANE}/packages/${JOB_NAME}/usr/bin/influxd-ctl show
+/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show
 
 #following to be onlu run on meta node 1, so if needs to be implemented
 <% p("influxdbcluster.influxdb-data").each_index do |i| %>
-/var/vcap/jobs/${JOB_NANE}/packages/${JOB_NAME}/usr/bin/influxd-ctl add-data influxdb-data-<%= i+1 %>:8088
+/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
 <% end %>
 
 # following to check if the nodes are joined, this could be imlementd somehow with monit
-/var/vcap/jobs/${JOB_NANE}/packages/${JOB_NAME}/usr/bin/influxd-ctl show
+/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show

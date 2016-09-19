@@ -8,14 +8,14 @@
 
 # Change this option to true to disable reporting.
 reporting-disabled = false
-
+hostname = "influxdb-data-<%= spec.index %>"
 meta-tls-enabled = false
 
 [enterprise]
   registration-enabled = false
   registration-server-url = ""
-  license-key = "<%= p("influxdb-data.licence-key") %>"
-  license-path = "<%= p("influxdb-data.licence-path") %>"
+  license-key = "<%= p("influxdb.license-key") %>"
+  license-path = "<%= p("influxdb-data.license-path") %>"
 
 [meta]
   enabled = false
@@ -77,13 +77,14 @@ meta-tls-enabled = false
 [http]
   enabled = true
   bind-address = ":<%= p("influxdb-data.http-port") %>"
-  auth-enabled = false
+  auth-enabled = true
   log-enabled = true
   write-tracing = false
   pprof-enabled = false
   https-enabled = false
   https-certificate = "<%= p("influxdb-data.pem-path") %>"
   json-write-enabled = false
+  shared-secret = "<%= p("influxdb.shared-secret") %>"
 
 [[graphite]]
   enabled = false

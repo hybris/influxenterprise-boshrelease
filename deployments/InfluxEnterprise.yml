@@ -6,15 +6,6 @@ releases:
   version: latest
 
 jobs:
-- name: influxdb-data
-  template: influxdb-data
-  instances: 2
-  resource_pool: influx-resource-pool
-  networks:
-    - name: influx-network
-      static_ips:
-        - 10.244.10.2
-        - 10.244.10.3
 - name: influxdb-meta
   template: influxdb-meta
   instances: 3
@@ -22,7 +13,16 @@ jobs:
   networks:
     - name: influx-network
       static_ips:
+        - 10.244.10.2
+        - 10.244.10.3
         - 10.244.10.4
+- name: influxdb-data
+  template: influxdb-data
+  instances: 2
+  resource_pool: influx-resource-pool
+  networks:
+    - name: influx-network
+      static_ips:
         - 10.244.10.5
         - 10.244.10.6
 - name: influxdb-web
@@ -75,12 +75,17 @@ update:
   max_in_flight: 3
 
 properties:
+  influxdb-web:
+    database: sqlite3:///var/vcap/store/influxdb/enterprise.db
+  influxdb:
+    license-key: 82117eb1-57a5-4de4-802d-5856bf4a67b3
+    shared-secret: "Long pass phrase that will be used to sign tokens"
   influxdbcluster:
-    influxdb-data:
+    influxdb-meta:
       - 10.244.10.2
       - 10.244.10.3
-    influxdb-meta:
       - 10.244.10.4
+    influxdb-data:
       - 10.244.10.5
       - 10.244.10.6
     influxdb-web: 10.244.10.7

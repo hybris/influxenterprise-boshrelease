@@ -16,3 +16,16 @@ fi
 #Cleanup - remove empty lines in the hosts file
 sed '/^$/d' /etc/hosts > /etc/hosts.out;
 mv  /etc/hosts.out /etc/hosts
+
+
+
+# check if the db exists
+dbstring='<%= p("influxdb-web.database") %>'
+dbfile=${dbstring#sqlite3://}
+if [ -f ${string} ]; then
+  echo "SQLite DB exists - Nothing to so"
+else
+  echo "DB Does not exisit - initialise"
+  # Migrate the configuration file (Basicaly it means , initiate the DB so it should only be done once. ;) )
+  /var/vcap/packages/<%= spec.name %>/usr/bin/influx-enterprise migrate --config /var/vcap/jobs/<%= spec.name %>/config/influx-enterprise.conf
+fi

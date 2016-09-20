@@ -2,6 +2,7 @@
 
 set -e -x
 
+if ! grep -q influxdb "/etc/hosts"; then
 cat << EOF >> /etc/hosts
 <% p("influxdbcluster.influxdb-data").each_index do |i| %>
 <%= p("influxdbcluster.influxdb-data")[i] %> influxdb-data-<%= i %>
@@ -11,3 +12,8 @@ cat << EOF >> /etc/hosts
 <% end %>
 <%= p("influxdbcluster.influxdb-web") %> influxdb-web
 EOF
+fi
+
+#Cleanup - remove empty lines in the hosts file
+sed '/^$/d' /etc/hosts > /etc/hosts.out
+mv  /etc/hosts.out /etc/hosts

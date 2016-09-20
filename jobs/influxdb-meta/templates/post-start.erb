@@ -3,20 +3,26 @@ set -e -x
 
 #Here to implement the loop that will check via ping all the cluster meta nodes are up and running before the join command is issued.
 
-#following will only run if this is the last node in the cluster
-if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-meta-2 8091 && nc -z influxdb-data-0 8088 && nc -z influxdb-data-1 8088; then
-  echo "This seems to be the last node so we can make the cluste now!" ;
-
-  <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
-  /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
-  <% end %>
-  <% p("influxdbcluster.influxdb-data").each_index do |i| %>
-  /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
-  <% end %>
-
-  # following to check if the nodes are joined
-  /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show
-
+#Check if not a member of the cluster already
+if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q influxdb; then
+  echo "Already a member of the cluster, exit"
 else
-  echo "Not the last NODE - carry on - not all the meta and data nodes are up and runing and listening on ports 8091 and 8088"
+  #Not a memmber of the lcuster yet, check if the other conditions are met
+
+  #following will only run if this is the last node in the cluster
+  if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-meta-2 8091 && nc -z influxdb-data-0 8088 && nc -z influxdb-data-1 8088; then
+    echo "This seems to be the last node so we can make the cluste now!" ;
+
+    <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
+    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
+    <% end %>
+    <% p("influxdbcluster.influxdb-data").each_index do |i| %>
+    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
+    <% end %>
+
+    # following to check if the nodes are joined
+    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show
+  else
+    echo "Not the last NODE - carry on - not all the meta and data nodes are up and runing and listening on ports 8091 and 8088"
+  fi
 fi

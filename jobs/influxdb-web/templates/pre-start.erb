@@ -23,7 +23,7 @@ mv  /etc/hosts.out /etc/hosts
 dbstring='<%= p("influxdb-web.database") %>'
 dbfile=${dbstring#sqlite3://}
 if [ -f ${string} ]; then
-  echo "SQLite DB exists - Nothing to so"
+  echo "SQLite DB exists - Nothing to do"
 else
   echo "DB Does not exisit - initialise"
   # Migrate the configuration file (Basicaly it means , initiate the DB so it should only be done once. ;) )

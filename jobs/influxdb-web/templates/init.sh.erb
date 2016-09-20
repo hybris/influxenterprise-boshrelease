@@ -47,7 +47,6 @@ SCRIPT_OPTS="run -c /var/vcap/jobs/$JOB_NAME/config/influx-enterprise.conf"
 
 # User to run the process under
 RUNAS=vcap
-#RUNAS=influx-enterprise
 
 start() {
     if [[ -f $PIDFILE ]]; then
@@ -59,12 +58,8 @@ start() {
         fi
     fi
     #local CMD="$SCRIPT $SCRIPT_OPTS 1>> \"$LOGFILE\" 2>> \"$ERRLOGFILE\" & echo \$!"
-    local CMD="$SCRIPT $SCRIPT_OPTS & echo \$!"
-echo $CMD
-return
-    su -s /bin/sh -c "$CMD" $RUNAS > "$PIDFILE"
-echo ${PIDFILE}
-echo "#########################"
+    local CMD="$SCRIPT $SCRIPT_OPTS & echo \$! > $PIDFILE
+    su -s /bin/sh -c "$CMD" $RUNAS
     sleep $START_TIMEOUT
     if [[ -f $PIDFILE ]]; then
         # PIDFILE exists
@@ -100,6 +95,7 @@ stop() {
             if [[ "$?" = "0" ]]; then
                 # Successful stop
                 echo '[OK] Service stopped.' >&2
+                rm $PIDFILE
                 return 0
             else
                 # Unsuccessful stop

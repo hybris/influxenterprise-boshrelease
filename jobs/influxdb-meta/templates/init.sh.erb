@@ -79,22 +79,6 @@ if [ -r /lib/lsb/init-functions ]; then
     source /lib/lsb/init-functions
 fi
 
-# Logging
-#if [ -z "$STDOUT" ]; then
-#    STDOUT=/dev/null
-#fi
-
-#if [ ! -f "$STDOUT" ]; then
-#    mkdir -p $(dirname $STDOUT)
-#fi
-
-#if [ -z "$STDERR" ]; then
-#    STDERR=/var/log/influxdb/influxdb-meta.log
-#fi
-
-#if [ ! -f "$STDERR" ]; then
-#    mkdir -p $(dirname $STDERR)
-#fi
 
 # Overwrite init script variables with /etc/default/influxdb-meta values
 if [ -r $DEFAULT ]; then
@@ -161,9 +145,9 @@ case $1 in
 
         # Checked the PID file exists and check the actual status of process
         if [ -e $PIDFILE ]; then
-	    PID="$(pgrep -f $PIDFILE)"
-	    if test ! -z $PID && kill -0 "$PID" &>/dev/null; then
-		# If the status is SUCCESS then don't need to start again.
+    	    PID="$(pgrep -f $PIDFILE)"
+    	    if test ! -z $PID && kill -0 "$PID" &>/dev/null; then
+    		    # If the status is SUCCESS then don't need to start again.
                 log_failure_msg "$NAME process is running"
                 exit 0 # Exit
             fi

@@ -66,11 +66,11 @@ CONFIG=/var/vcap/jobs/$JOB_NAME/config/influxdb-meta.conf
 
 # PID file for the daemon
 #PIDFILE=/var/run/influxdb-meta/influxdb-meta.pid
-PIDDIR=`dirname $PIDFILE`
-if [ ! -d "$PIDDIR" ]; then
-    mkdir -p $PIDDIR
-    chown $USER:$GROUP $PIDDIR
-fi
+#PIDDIR=`dirname $PIDFILE`
+#if [ ! -d "$PIDDIR" ]; then
+#    mkdir -p $PIDDIR
+#    chown $USER:$GROUP $PIDDIR
+#fi
 
 # Max open files
 OPEN_FILE_LIMIT=65536

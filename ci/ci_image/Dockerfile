@@ -1,5 +1,4 @@
-FROM concourse/concourse-ci
-FROM concourse/concourse-ci
+FROM ubuntu:latest
 # https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
 RUN apt-get update && apt-get install curl wget bzr strace -y

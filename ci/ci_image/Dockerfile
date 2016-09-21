@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 # https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
-RUN apt-get update && apt-get install curl wget bzr strace -y
+RUN apt-get update && apt-get install curl wget bzr strace unzip -y
 
 ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
 RUN chmod 775 /usr/bin/jq

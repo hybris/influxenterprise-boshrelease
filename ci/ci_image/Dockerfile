@@ -13,7 +13,8 @@ RUN apk add bash \
             go \
             tar \
             jq \
-            git
+            git \
+            bzr
             #python \
             #nodejs
 

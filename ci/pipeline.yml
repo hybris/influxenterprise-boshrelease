@@ -1,17 +1,17 @@
-#groups:
-# - name: build
-#   jobs:
-#  - testflight
-#  - rc
-  #- shipit
-#- name: version
-#  jobs:
-  #- patch
-  #- minor
-  #- major
-# - name: ci_image
-#   jobs:
-#   - build-task-image
+groups:
+- name: build
+  jobs:
+  - testflight
+  - rc
+  - shipit
+- name: version
+  jobs:
+  - patch
+  - minor
+  - major
+- name: ci_image
+  jobs:
+  - build-task-image
 
 jobs:
 - name: build-task-image
@@ -24,170 +24,167 @@ jobs:
     params:
       build: git-boshrelease/ci/ci_image
 
-# - name: testflight
-#   public: true
-#   serial: true
-#   plan:
-#   - do:
-#     - aggregate:
-#       - get: turbine-boshrelease
-#         resource: git-turbine-boshrelease
-#       - get: git-turbine-boshrelease-release-changes
-#         trigger: true
-#     - task: create-release-and-deploy
-#       config:
-#         platform: linux
-#         image: {{docker-hub-task-image}}
-#         inputs:
-#         - {name: turbine-boshrelease}
-#         run:
-#           path: ./turbine-boshrelease/ci/scripts/create_release_and_deploy.sh
-#           args: []
-#         params:
-#           bosh_target: {{bosh-lite-build-target}}
-#           bosh_username: {{bosh-lite-build-username}}
-#           bosh_password: {{bosh-lite-build-password}}
-#           bosh_deployment_name: {{bosh-lite-build-deployment-name}}
+- name: testflight
+  public: true
+  serial: true
+  plan:
+  - do:
+    - aggregate:
+      - get: influxenterprise-boshrelease
+        resource: git-influxenterprise-boshrelease
+      - get: git-influxenterprise-boshrelease-release-changes
+        trigger: true
+    - task: create-release-and-deploy
+      config:
+        platform: linux
+        image: {{docker-hub-task-image}}
+        inputs:
+        - {name: influxenterprise-boshrelease}
+        run:
+          path: ./influxenterprise-boshrelease/ci/scripts/create_release_and_deploy.sh
+          args: []
+        params:
+          bosh_target: {{bosh-lite-build-target}}
+          bosh_username: {{bosh-lite-build-username}}
+          bosh_password: {{bosh-lite-build-password}}
+          bosh_deployment_name: {{bosh-lite-build-deployment-name}}
 
-# - name: rc
-#   public: true
-#   plan:
-#   - aggregate:
-#     - get: boshrelease
-#       resource: git-turbine-boshrelease
-#       passed: [testflight]
-#       trigger: true
-#     - get: version
-#       trigger: false
-#       params: {bump: minor, pre: rc}
-#   - put: version
-#     params: {file: version/number}
-#
-# - name: patch
-#   public: true
-#   plan:
-#   - aggregate:
-#     - get: version
-#       trigger: false
-#       params: {bump: patch}
-#   - put: version
-#     params: {file: version/number}
-#
-# - name: minor
-#   public: true
-#   plan:
-#   - aggregate:
-#     - get: version
-#       trigger: false
-#       params: {bump: minor}
-#   - put: version
-#     params: {file: version/number}
-#
-# - name: major
-#   public: true
-#   plan:
-#   - aggregate:
-#     - get: version
-#       trigger: false
-#       params: {bump: major}
-#   - put: version
-#     params: {file: version/number}
-#
-# - name: shipit
-#   public: true
-#   serial: true
-#   plan:
-#   - aggregate:
-#     - get: version
-#       passed: [rc]
-#       params: {bump: final}
-#     - get: boshrelease
-#       resource: git-turbine-boshrelease
-#       passed: [rc]
-#   - task: create-final-release
-#     config:
-#       platform: linux
-#       image: {{docker-hub-task-image}}
-#       inputs:
-#       - {name: boshrelease, path: turbine-boshrelease}
-#       - {name: version}
-#       outputs:
-#       - {name: create-final-release, path: output}
-#       run:
-#         path: ./turbine-boshrelease/ci/scripts/shipit.sh
-#         args: []
-#       params:
-#         release_name: "Turbine BOSH Release"
-#         bosh_target: {{bosh-lite-build-target}}
-#         bosh_username: {{bosh-lite-build-username}}
-#         bosh_password: {{bosh-lite-build-password}}
-#         bosh_deployment_name: {{bosh-lite-build-deployment-name}}
-#         aws_access_key_id: {{boshrelease-aws-access-key-id}}
-#         aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
-#         promotion_branch: master
-#         output_dir: ../output/turbine-boshrelease
-#   - put: git-turbine-boshrelease
-#     params:
-#       repository: create-final-release/turbine-boshrelease
-#       rebase: true
-#   - aggregate:
-#     - put: version
-#       params: {file: version/number}
-#     - put: final-release
-#       params:
-#         from: create-final-release/turbine-boshrelease/releases/turbine/turbine-(.*).tgz
-#         to: turbine-boshrelease/
-#     - put: github-final-release
-#       params:
-#         name: create-final-release/turbine-boshrelease/release/name
-#         tag: create-final-release/turbine-boshrelease/release/tag
-#         body: create-final-release/turbine-boshrelease/release/notes.md
-#         globs: [create-final-release/turbine-boshrelease/releases/turbine/turbine-*.tgz]
+- name: rc
+  public: true
+  plan:
+  - aggregate:
+    - get: boshrelease
+      resource: git-influxenterprise-boshrelease
+      passed: [testflight]
+      trigger: true
+    - get: version
+      trigger: false
+      params: {bump: minor, pre: rc}
+  - put: version
+    params: {file: version/number}
+
+- name: patch
+  public: true
+  plan:
+  - aggregate:
+    - get: version
+      trigger: false
+      params: {bump: patch}
+  - put: version
+    params: {file: version/number}
+
+- name: minor
+  public: true
+  plan:
+  - aggregate:
+    - get: version
+      trigger: false
+      params: {bump: minor}
+  - put: version
+    params: {file: version/number}
+
+- name: major
+  public: true
+  plan:
+  - aggregate:
+    - get: version
+      trigger: false
+      params: {bump: major}
+  - put: version
+    params: {file: version/number}
+
+- name: shipit
+  public: true
+  serial: true
+  plan:
+  - aggregate:
+    - get: version
+      passed: [rc]
+      params: {bump: final}
+    - get: boshrelease
+      resource: git-influxenterprise-boshrelease
+      passed: [rc]
+  - task: create-final-release
+    config:
+      platform: linux
+      image: {{docker-hub-task-image}}
+      inputs:
+      - {name: boshrelease, path: influxenterprise-boshrelease}
+      - {name: version}
+      run:
+        path: ./influxenterprise-boshrelease/ci/scripts/shipit.sh
+        args: []
+      params:
+        release_name: "influxenterprise BOSH Release"
+        bosh_target: {{bosh-lite-build-target}}
+        bosh_username: {{bosh-lite-build-username}}
+        bosh_password: {{bosh-lite-build-password}}
+        bosh_deployment_name: {{bosh-lite-build-deployment-name}}
+        aws_access_key_id: {{boshrelease-aws-access-key-id}}
+        aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
+        promotion_branch: master
+  - put: git-influxenterprise-boshrelease
+    params:
+      repository: create-final-release/influxenterprise-boshrelease
+      rebase: true
+  - aggregate:
+    - put: version
+      params: {file: version/number}
+    - put: final-release
+      params:
+        from: create-final-release/influxenterprise-boshrelease/releases/influxenterprise/influxenterprise-(.*).tgz
+        to: influxenterprise-boshrelease/
+    - put: github-final-release
+      params:
+        name: create-final-release/influxenterprise-boshrelease/release/name
+        tag: create-final-release/influxenterprise-boshrelease/release/tag
+        body: create-final-release/influxenterprise-boshrelease/release/notes.md
+        globs: [create-final-release/influxenterprise-boshrelease/releases/influxenterprise/influxenterprise-*.tgz]
 
 resources:
-# - name: version
-#   type: semver
-#   source:
-#     key: current-version
-#     bucket: {{pipeline-aws-bucket}}
-#     access_key_id: {{pipeline-aws-access-key-id}}
-#     secret_access_key: {{pipeline-aws-secret-access-key}}
-#     initial_version: 0.0.0
+- name: version
+  type: semver
+  source:
+    key: current-version
+    bucket: {{pipeline-aws-bucket}}
+    access_key_id: {{pipeline-aws-access-key-id}}
+    secret_access_key: {{pipeline-aws-secret-access-key}}
+    initial_version: 0.0.0
 
-- name: git-InfluxEnterprise-boshrelease
+- name: git-influxenterprise-boshrelease
   type: git
   source:
     uri: {{pipeline-git-repo}}
     branch: {{pipeline-branch}}
 
-# - name: git-turbine-boshrelease-release-changes
-#   type: git
-#   source:
-#     uri: {{pipeline-git-repo}}
-#     branch: {{pipeline-branch}}
-#     paths:
-#       - src/**/*
-#       - jobs/**/*
-#       - packages/**/*
-#       - config/blobs.yml
-#       - .final_builds/**/*
-#       - templates/**/*
-#       - .gitmodules
-#
-# - name: github-final-release
-#   type: github-release
-#   source:
-#     user: hybris
-#     repository: turbine-boshrelease
-#     access_token: {{github-access-token}}
+- name: git-influxenterprise-boshrelease-release-changes
+  type: git
+  source:
+    uri: {{pipeline-git-repo}}
+    branch: {{pipeline-branch}}
+    paths:
+      - src/**/*
+      - jobs/**/*
+      - packages/**/*
+      - config/blobs.yml
+      - .final_builds/**/*
+      - templates/**/*
+      - .gitmodules
 
-# - name: final-release
-#   type: s3
-#   source:
-#     bucket: {{boshrelease-aws-bucket}}
-#     regexp: turbine-boshrelease/turbine-(.*).tgz
-#     access_key_id: {{boshrelease-aws-access-key-id}}
-#     secret_access_key: {{boshrelease-aws-secret-access-key}}
+- name: github-final-release
+  type: github-release
+  source:
+    user: hybris
+    repository: influxenterprise-boshrelease
+    access_token: {{github-access-token}}
+
+- name: final-release
+  type: s3
+  source:
+    bucket: {{boshrelease-aws-bucket}}
+    regexp: influxenterprise-boshrelease/influxenterprise-(.*).tgz
+    access_key_id: {{boshrelease-aws-access-key-id}}
+    secret_access_key: {{boshrelease-aws-secret-access-key}}
 
 - name: git-boshrelease
   type: git

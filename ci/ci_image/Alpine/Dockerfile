@@ -1,43 +1,45 @@
-#
-# Alpine based Dockerfile
-#
+FROM alpine:3.4
 
-# Pull base image.
-FROM alpine
+RUN apk add --no-cache ca-certificates
 
-RUN apk update && apk upgrade
-#    apk add git && \
-RUN apk add bash \
-            curl \
-            unzip \
-            # go \
-            tar \
-            jq \
-            git \
-            bzr
-            #python \
-            #nodejs
+ENV GOLANG_VERSION 1.7.1
+ENV GOLANG_SRC_URL https://golang.org/dl/go$GOLANG_VERSION.src.tar.gz
+ENV GOLANG_SRC_SHA256 2b843f133b81b7995f26d0cb64bbdbb9d0704b90c44df45f844d28881ad442d3
 
-#RUN apt-get update && apt-get install curl wget bzr strace unzip -y
+# https://golang.org/issue/14851
+COPY no-pic.patch /
 
-#ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
-#RUN chmod 775 /usr/bin/jq
+RUN set -ex \
+	&& apk add --no-cache --virtual .build-deps \
+		bash \
+		gcc \
+		musl-dev \
+		openssl \
+		#go \
+    git \
+	\
+	&& export GOROOT_BOOTSTRAP="$(go env GOROOT)" \
+	\
+	&& wget -q "$GOLANG_SRC_URL" -O golang.tar.gz \
+	&& echo "$GOLANG_SRC_SHA256  golang.tar.gz" | sha256sum -c - \
+	&& tar -C /usr/local -xzf golang.tar.gz \
+	&& rm golang.tar.gz \
+	&& cd /usr/local/go/src \
+	&& patch -p2 -i /no-pic.patch \
+	&& ./make.bash \
+	\
+	&& rm -rf /*.patch \
+	&& apk del .build-deps
 
-ADD https://github.com/cloudfoundry-incubator/spiff/releases/download/v1.0.7/spiff_linux_amd64.zip /tmp/
-RUN unzip -o /tmp/spiff_linux_amd64.zip -d /usr/local/bin
-RUN rm /tmp/spiff_linux_amd64.zip
-
-# Install Go
-RUN \
-  mkdir -p /goroot && \
-  curl https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
-#  curl https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
-
-# Set environment variables.
-ENV GOROOT /goroot
-#/usr/lib/go
 ENV GOPATH /gopath
-ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
+ENV GOROOT /goroot
+ENV PATH $GOROOT/bin:$GOPATH/bin:/usr/local/go/bin:$PATH
+
+RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" "$GOROOT" && chmod -R 777 "$GOPATH"
+WORKDIR $GOPATH
+
+COPY go-wrapper /usr/local/bin/
+
 
 RUN go get github.com/bronze1man/yaml2json
 RUN go get github.com/cloudfoundry-community/humanize-manifest

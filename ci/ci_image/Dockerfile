@@ -1,27 +1,10 @@
-#
-# Alpine based Dockerfile
-#
+FROM ubuntu:latest
+# https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
-# Pull base image.
-FROM alpine
+RUN apt-get update && apt-get install curl wget bzr strace unzip -y
 
-RUN apk update && apk upgrade
-#    apk add git && \
-RUN apk add bash \
-            curl \
-            unzip \
-            go \
-            tar \
-            jq \
-            git \
-            bzr
-            #python \
-            #nodejs
-
-#RUN apt-get update && apt-get install curl wget bzr strace unzip -y
-
-#ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
-#RUN chmod 775 /usr/bin/jq
+ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
+RUN chmod 775 /usr/bin/jq
 
 ADD https://github.com/cloudfoundry-incubator/spiff/releases/download/v1.0.7/spiff_linux_amd64.zip /tmp/
 RUN unzip -o /tmp/spiff_linux_amd64.zip -d /usr/local/bin
@@ -30,12 +13,10 @@ RUN rm /tmp/spiff_linux_amd64.zip
 # Install Go
 RUN \
   mkdir -p /goroot && \
-  curl https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
-#  curl https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
+  curl https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
 
 # Set environment variables.
 ENV GOROOT /goroot
-#/usr/lib/go
 ENV GOPATH /gopath
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 

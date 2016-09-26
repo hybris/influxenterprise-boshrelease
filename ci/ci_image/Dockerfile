@@ -1,20 +1,26 @@
 #
-# Alpine based Dockerfile
+# Ubuntu 16.04 LTS based Dockerfile
 #
 
 # Pull base image.
-FROM alpine
+FROM ubuntu:16.04
+#ruby:2.2.2
+#ubuntu:latest
+# https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
-RUN apk update && apk upgrade
-RUN apk add bash \
-            curl \
-            unzip \
-            go \
-            tar \
-            jq \
-            git \
-            bzr
+RUN apt-get update
+RUN apt-get install -y curl \
+    wget \
+    bzr \
+    #strace \
+    unzip \
+    git
+#    jq
+#    go
 
+#    #Install BOSH CLI
+#    RUN apk add build-essential ruby ruby-dev libxml2-dev libsqlite3-dev libxslt1-dev libpq-dev libmysqlclient-dev zlib1g-dev
+#    RUN gem install bosh_cli --no-ri --no-rdoc
 
 
 #ADD http://stedolan.github.io/jq/download/linux64/jq /usr/bin/
@@ -27,19 +33,11 @@ RUN rm /tmp/spiff_linux_amd64.zip
 # Install Go
 #RUN \
 #  mkdir -p /goroot && \
-#  curl https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
 #  curl https://storage.googleapis.com/golang/go1.4.2.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
 
 # Set environment variables.
 #ENV GOROOT /goroot
-#/usr/lib/go
-ENV GOPATH /gopath
-RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
+#ENV GOPATH /gopath
+#ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 
-ENV PATH $GOROOT/bin:$GOPATH/bin:/usr/local/go/bin:$PATH
-WORKDIR $GOPATH
-
-
-
-RUN go get github.com/bronze1man/yaml2json
-#RUN go get github.com/cloudfoundry-community/humanize-manifest
+#RUN go get github.com/bronze1man/yaml2json

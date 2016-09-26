@@ -16,7 +16,7 @@ auth:
 EOF
 bosh target ${bosh_target}
 
-_bosh() {
+_bosh() { 
   bosh -n $@
 }
 

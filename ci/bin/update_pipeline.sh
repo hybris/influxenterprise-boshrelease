@@ -7,7 +7,7 @@ PIPELINE_NAME=${PIPELINE_NAME:-"influxenterprise-boshrelease"}
 
 #CREDENTIALS=${CREDENTIALS:-"credentials.yml"}
 CREDENTIALS=$(mktemp /tmp/credentials.XXXXX)
-vault read -field=value -tls-skip-verify secret/concourse/InfluxEnterprise-boshrelease > ${CREDENTIALS}
+vault read -field=value -tls-skip-verify secret/concourse/influxenterprise-boshrelease > ${CREDENTIALS}
 echo ${CREDENTIALS}
 cat ${CREDENTIALS}
 

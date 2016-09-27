@@ -1,9 +1,0 @@
----
-builds:
-  8fdfda42b85c1921a8845fd9e442184b831acc76:
-    version: 8fdfda42b85c1921a8845fd9e442184b831acc76
-    sha1: aa4b52b4dc61d23c008a0e50eb12dabde6a0ae11
-  b5db49b4fd8c3b752c78432fab7cf3b2430c9271:
-    version: b5db49b4fd8c3b752c78432fab7cf3b2430c9271
-    sha1: 9b04ace47b78ffe3f76ae4130c463a041e3c037b
-format-version: '2'

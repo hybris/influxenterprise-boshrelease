@@ -1,4 +1,4 @@
-name: InfluxEnterprise
+name: influxenterprise
 director_uuid: <%= `bosh status --uuid` %>
 
 releases:

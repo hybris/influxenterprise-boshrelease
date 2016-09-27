@@ -32,12 +32,11 @@ RUN unzip -o /tmp/spiff_linux_amd64.zip -d /usr/local/bin
 RUN rm /tmp/spiff_linux_amd64.zip
 
 #Install Go
-RUN \
-  mkdir -p /goroot && \
-  curl -O https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1 \
-  rm go1.6.linux-amd64.tar.gz
 ENV GOROOT /goroot
 ENV GOPATH /gopath
+RUN mkdir -p /goroot && \
+    curl https://storage.googleapis.com/golang/go1.6.linux-amd64.tar.gz | tar xvzf - -C $GOROOT --strip-components=1 \
+    rm go1.6.linux-amd64.tar.gz
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 ENV PATH $GOROOT/bin:$GOPATH/bin:$PATH
 WORKDIR $GOPATH

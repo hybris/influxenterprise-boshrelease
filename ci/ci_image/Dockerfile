@@ -1,14 +1,11 @@
 #
 # Ubuntu 16.04 LTS based Dockerfile
 #
-
 # Pull base image.
 FROM ubuntu:16.04
-#ruby:2.2.2
-#ubuntu:latest
-# https://github.com/concourse/concourse/blob/master/ci/dockerfiles/concourse-ci/Dockerfile
 
 RUN apt-get update && apt-get install -y \
+    apt-utils \
     curl \
     wget \
     bzr \

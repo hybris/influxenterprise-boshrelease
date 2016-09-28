@@ -2,7 +2,7 @@ name: influxenterprise
 director_uuid: <%= `bosh status --uuid` %>
 
 releases:
-- name: InfluxEnterprise
+- name: influxenterprise
   version: latest
 
 jobs:

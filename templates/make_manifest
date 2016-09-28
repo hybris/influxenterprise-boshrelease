@@ -47,8 +47,10 @@ if [[ "${STEMCELL}X" == "X" ]]; then
   bosh upload stemcell $STEMCELL_URL
 fi
 STEMCELL=${STEMCELL:-$(latest_uploaded_stemcell)}
+echo -e "2st Stemcell ${STEMCELL}\n"
 
 templates=$(dirname $0)
+echo -e "\ntemplates: ${templates} "
 release=$templates/..
 tmpdir=$release/tmp
 

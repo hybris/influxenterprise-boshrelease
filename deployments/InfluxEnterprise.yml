@@ -62,7 +62,7 @@ networks:
 #      name: random
 
 compilation:
-  workers: 1
+  workers: 6
   network: influx-network
   reuse_compilation_vms: true
   cloud_properties: {}

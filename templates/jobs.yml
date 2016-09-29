@@ -9,15 +9,48 @@ update:
   serial: false
 
 jobs:
-  - name: just_install_packages
-    templates:
-    - name: just_install_packages
-      release: influxenterprise
-    instances: 1
-    persistent_disk: 0
-    resource_pool: small_z1
+#  - name: influxenterprise
+#    templates:
+#    - name: influxenterprise
+#      release: influxenterprise
+#    instances: 1
+#    persistent_disk: 0
+#    resource_pool: small_z1
+#    networks: (( merge ))
+
+  - name: influxdb-data
+    template: influxdb-data
+    instances: 2
+    resource_pool: influx-resource-pool
     networks: (( merge ))
+    persistent_disk: 0
+    properties: {}
+
+  - name: influxdb-meta
+    template: influxdb-meta
+    instances: 3
+    resource_pool: influx-resource-pool
+    networks: (( merge ))
+    persistent_disk: 0
+    properties: {}
+
+  - name: influxdb-web
+    template: influxdb-web
+    instances: 1
+    resource_pool: influx-resource-pool
+    networks: (( merge ))
+
 
 networks: (( merge ))
 
-properties: {}
+# properties: {}
+properties:
+  influxdb-web:
+    database: sqlite3:///var/vcap/store/influxdb/enterprise.db
+  influxdb:
+    license-key: 82117eb1-57a5-4de4-802d-5856bf4a67b3
+    shared-secret: "Long pass phrase that will be used to sign tokens"
+  influxdbcluster:
+    influxdb-meta: (( jobs.influxdb-meta.networks.influx-network.static_ips ))
+    influxdb-data: (( jobs.influxdb-data.networks.influx-network.static_ips ))
+    influxdb-web: (( jobs.influxdb-web.networks.influx-network.static_ips ))

@@ -16,7 +16,7 @@ properties: (( merge ))
 
 compilation:
   workers: 6
-  network: influxenterprise1
+  network: influx-network
   reuse_compilation_vms: true
   cloud_properties: (( merge ))
 
@@ -28,8 +28,14 @@ update:
   serial: false
 
 resource_pools:
-  - name: small_z1
-    network: influxenterprise1
+  # - name: small_z1
+  #   network: influxenterprise1
+  #   size: (( auto ))
+  #   stemcell: (( meta.stemcell ))
+  #   cloud_properties: (( merge ))
+
+  - name: influx-resource-pool
+    network: influx-network
     size: (( auto ))
     stemcell: (( meta.stemcell ))
     cloud_properties: (( merge ))

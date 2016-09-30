@@ -1,7 +1,7 @@
 # This the "pretty" URL that end users will see for this app
 #url = "<%= p("influxdb-web.prettyurl") %>" # ENV: URL
 #or
-url = "http://<%= p("influxdbcluster.influxdb-web") %>:3000"
+url = "http://<%= p("influxdbcluster.influxdb-web")[0] %>:3000"
 
 
 # This is the host and port you want to bind the application to.

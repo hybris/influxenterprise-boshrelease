@@ -5,7 +5,7 @@ hostname = "influxdb-meta-<%= spec.index %>"
 [enterprise]
 #registration server is the Web server of the cluster
   registration-enabled = true
-  registration-server-url = "http://<%= p("influxdbcluster.influxdb-web") %>:3000"
+  registration-server-url = "http://<%= p("influxdbcluster.influxdb-web")[0] %>:3000"
   license-key = "<%= p("influxdb.license-key") %>"
   license-path = "<%= p("influxdb-meta.license-path") %>"
 

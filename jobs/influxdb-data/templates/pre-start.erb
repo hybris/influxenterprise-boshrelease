@@ -9,7 +9,7 @@ cat << EOF >> /etc/hosts
 <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
 <%= p("influxdbcluster.influxdb-meta")[i] %> influxdb-meta-<%= i %>
 <% end %>
-<%= p("influxdbcluster.influxdb-web") %> influxdb-web
+<%= p("influxdbcluster.influxdb-web")[0] %> influxdb-web
 EOF
 fi
 

@@ -186,7 +186,7 @@ resources:
   type: s3
   source:
     bucket: {{boshrelease-aws-bucket}}
-    regexp: influxdb-boshrelease/influxenterprise-(.*).tgz
+    regexp: influxdb-boshrelease/influxdb-(.*).tgz
     access_key_id: {{boshrelease-aws-access-key-id}}
     secret_access_key: {{boshrelease-aws-secret-access-key}}
 

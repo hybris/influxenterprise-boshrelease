@@ -111,6 +111,9 @@ jobs:
       inputs:
       - {name: boshrelease, path: influxenterprise-boshrelease}
       - {name: version}
+      outputs:
+      - {name: create-final-release, path: output}
+
       run:
         path: ./influxenterprise-boshrelease/ci/scripts/shipit.sh
         args: []
@@ -123,6 +126,7 @@ jobs:
         aws_access_key_id: {{boshrelease-aws-access-key-id}}
         aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
         promotion_branch: master
+        output_dir: ../output/turbine-boshrelease
   - put: git-influxenterprise-boshrelease
     params:
       repository: create-final-release/influxenterprise-boshrelease

@@ -126,7 +126,7 @@ jobs:
         aws_access_key_id: {{boshrelease-aws-access-key-id}}
         aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
         promotion_branch: master
-        output_dir: ../output/turbine-boshrelease
+        output_dir: ../output/influxenterprise-boshrelease
   - put: git-influxenterprise-boshrelease
     params:
       repository: create-final-release/influxenterprise-boshrelease

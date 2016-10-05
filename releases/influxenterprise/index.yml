@@ -1,0 +1,5 @@
+---
+builds:
+  49d9a5cb-1a2a-4905-8fb2-e9f1b71d29f1:
+    version: 0.8.0
+format-version: '2'

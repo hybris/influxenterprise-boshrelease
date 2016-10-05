@@ -6,7 +6,6 @@ releases:
   version: latest
 
 jobs:
-
 - name: influxdb-data
   template: influxdb-data
   instances: 2

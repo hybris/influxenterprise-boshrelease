@@ -1,5 +1,5 @@
 ---
-final_name: influxdb
+final_name: influxenterprise
 blobstore:
   provider: s3
   options:

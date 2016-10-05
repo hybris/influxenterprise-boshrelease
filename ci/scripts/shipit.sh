@@ -60,7 +60,7 @@ git merge --no-edit ${promotion_branch}
 
 bosh target ${BOSH_TARGET}
 
-bosh -n create release --final --with-tarball --version "$version" --name "influxenterprise"
+bosh -n create release --final --with-tarball --version "$version"
 
 # copy to output dir
 source_dir=$(pwd)

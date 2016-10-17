@@ -4,26 +4,19 @@ groups:
   - testflight
   - rc
   - shipit
+
 - name: version
   jobs:
   - patch
   - minor
   - major
+
 - name: ci_image
   jobs:
   - build-task-image
 
-jobs:
-- name: build-task-image
-  public: true
-  serial: true
-  plan:
-  - get: git-boshrelease
-    trigger: true
-  - put: docker-image
-    params:
-      build: git-boshrelease/ci/ci_image
 
+jobs:
 - name: testflight
   public: true
   serial: true
@@ -34,6 +27,7 @@ jobs:
         resource: git-influxenterprise-boshrelease
       - get: git-influxenterprise-boshrelease-release-changes
         trigger: true
+
     - task: create-release-and-deploy
       config:
         platform: linux
@@ -144,6 +138,18 @@ jobs:
         tag: create-final-release/influxenterprise-boshrelease/release/tag
         body: create-final-release/influxenterprise-boshrelease/release/notes.md
         globs: [create-final-release/influxenterprise-boshrelease/releases/influxenterprise/influxenterprise-*.tgz]
+
+- name: build-task-image
+  public: true
+  serial: true
+  plan:
+  - get: git-boshrelease
+    trigger: true
+  - put: docker-image
+    params:
+      build: git-boshrelease/ci/ci_image
+
+
 
 resources:
 - name: version

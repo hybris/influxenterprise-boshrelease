@@ -78,7 +78,7 @@ properties:
   influxdb-web:
     database: sqlite3:///var/vcap/store/influxdb/enterprise.db
   influxdb:
-    license-key: 82117eb1-57a5-4de4-802d-5856bf4a67b3
+    license-key: 73e0a45e-525b-4281-a4a2-0d4549b5ae48
     shared-secret: "Long pass phrase that will be used to sign tokens"
   influxdbcluster:
     influxdb-meta:

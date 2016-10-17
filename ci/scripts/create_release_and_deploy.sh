@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -x
 # change to root of bosh release
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd $DIR/../..
@@ -16,7 +16,7 @@ auth:
 EOF
 bosh target ${bosh_target}
 
-_bosh() { 
+_bosh() {
   bosh -n $@
 }
 

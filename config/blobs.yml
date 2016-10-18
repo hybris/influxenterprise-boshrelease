@@ -1,1 +1,13 @@
---- {}
+---
+influxdb/influx-enterprise-1.0.0_linux_amd64.tar.gz:
+  object_id: b4bc54e9-110c-4466-afa5-c1f7bcce2583
+  sha: d0e80260074191b2284d9a9746d1e0c002868fe1
+  size: 11444409
+influxdb/influxdb-data-1.0.0-c1.0.0_linux_amd64.tar.gz:
+  object_id: 262a2723-f825-4cf3-9953-c4420ec7a076
+  sha: b4ca01be0ced6e3867d4ca89bb478d0d25e28eeb
+  size: 18521201
+influxdb/influxdb-meta-1.0.0-c1.0.0_linux_amd64.tar.gz:
+  object_id: de44ece7-3895-49d3-98ad-a4f4c0cb0938
+  sha: 5ca40354a6854e73dd1069dc8d5b8531cef6b19e
+  size: 9087205

@@ -1,0 +1,5 @@
+---
+builds:
+  c21283e1-41a6-4c10-96d2-f218c26cefb4:
+    version: 0.10.0
+format-version: '2'

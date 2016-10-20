@@ -21,7 +21,5 @@ tmp
 *credentials.yml
 
 ci/bin/update_pipeline_local.sh
-src/influxdb/*.deb
-#src/influxdb/influxdb*/
-templates_bak/
 my*.yml
+deployments/

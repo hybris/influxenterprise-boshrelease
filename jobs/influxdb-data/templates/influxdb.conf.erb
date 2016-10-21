@@ -7,15 +7,16 @@
 # is very helpful for us.
 
 # Change this option to true to disable reporting.
-reporting-disabled = false
+reporting-disabled = true
 hostname = "influxdb-data-<%= spec.index %>"
 meta-tls-enabled = false
 
 [enterprise]
-  registration-enabled = false
-  registration-server-url = ""
+  registration-enabled = true
+  registration-server-url = "http://<%= p("influxdbcluster.influxdb-web")[0] %>:3000"
   license-key = "<%= p("influxdb.license-key") %>"
-  license-path = "<%= p("influxdb-data.license-path") %>"
+  #license-path = "<%= p("influxdb.license-path") %>"
+  license-path = "/var/vcap/jobs/<%= spec.name %>/license/InfluxDB-Production.license"
 
 [meta]
   enabled = false

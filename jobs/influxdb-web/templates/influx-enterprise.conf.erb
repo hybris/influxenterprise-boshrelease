@@ -10,7 +10,9 @@ port = "<%= p("influxdb-web.port") %>" # ENV: PORT
 
 # You need either a license key or a license file to run Enterprise Web
 license-key = "<%= p("influxdb.license-key") %>" # ENV: LICENSE_KEY
-license-file = "<%= p("influxdb-web.license-file") %>" # ENV: LICENSE_FILE
+# ENV: LICENSE_FILE
+#license-file = "<%= p("influxdb.license-path") %>"
+license-file = "/var/vcap/jobs/<%= spec.name %>/license/InfluxDB-Production.license"
 
 [influxdb]
 # The "shared-secret" let's us authenticate users between Enterprise Web

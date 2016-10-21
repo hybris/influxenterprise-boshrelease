@@ -17,15 +17,19 @@ fi
 sed '/^$/d' /etc/hosts > /etc/hosts.out;
 mv  /etc/hosts.out /etc/hosts
 
-
-
 # check if the db exists
 dbstring='<%= p("influxdb-web.database") %>'
 dbfile=${dbstring#sqlite3://}
+echo ${dbfile}
 if [ -f ${dbfile} ]; then
   echo "SQLite DB exists - Nothing to do"
 else
   echo "DB Does not exisit - initialise"
   # Migrate the configuration file (Basicaly it means , initiate the DB so it should only be done once. ;) )
-  /var/vcap/packages/<%= spec.name %>/usr/bin/influx-enterprise migrate --config /var/vcap/jobs/<%= spec.name %>/config/influx-enterprise.conf
+  mkdir -p /var/vcap/store/influxdb
+  chown -R vcap:vcap /var/vcap/store/influxdb
+  chmod +rx -R /var/vcap/store
+  wait $!
+  sudo -u vcap /var/vcap/packages/<%= spec.name %>/usr/bin/influx-enterprise migrate --config /var/vcap/jobs/<%= spec.name %>/config/influx-enterprise.conf
+  wait $!
 fi

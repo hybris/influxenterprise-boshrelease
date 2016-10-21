@@ -5,6 +5,7 @@ templates:
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
   post-start.erb: bin/post-start
+  InfluxDB-Production.license.erb: license/InfluxDB-Production.license
 
 packages:
   - influxdb-meta
@@ -12,9 +13,14 @@ packages:
 properties:
   influxdb.license-key:
     description: License key
-  influxdb-meta.license-path:
-    description: Path to licence if key not provided
     default: ""
+  influxdb.license-path:
+    description: License file location if key not provided
+    default: ""
+  influxdb.license-file:
+    description: License file content
+    default: ""
+
   influxdb-meta.meta-dir:
     description: meta Dir
     default: /var/vcap/store/influxdb/meta
@@ -30,6 +36,7 @@ properties:
   influxdb-meta.pem-path:
     description: SSL pem path
     default: /etc/ssl/influxdb.pem
+
   influxdbcluster.influxdb-data:
     description: list of ips of data nodes in the cluster
     default: []

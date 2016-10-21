@@ -2,7 +2,7 @@ meta:
   environment: ~
 
 update:
-  canaries: 1
+  canaries: 6
   max_in_flight: 50
   canary_watch_time: 1000-30000
   update_watch_time: 1000-30000
@@ -48,8 +48,32 @@ properties:
   influxdb-web:
     database: sqlite3:///var/vcap/store/influxdb/enterprise.db
   influxdb:
-    license-key: 73e0a45e-525b-4281-a4a2-0d4549b5ae48
-    shared-secret: "Long pass phrase that will be used to sign tokens"
+    license-key: ""
+#    license-key: "73e0a45e-525b-4281-a4a2-0d4549b5ae48"
+    #license-path: ""
+    shared-secret: "TOKEN6FzTpJ7oOJ8TDWVA7Q4EqjzGtGmLBUejfbk4yyCw"
+    license-file: '{
+  "license": {
+    "key": "87295329-1945-4238-b091-6719d8856983",
+    "state": "active",
+    "expires_at": "2017-09-01T00:00:00Z",
+    "valid": true,
+    "entitlements": {
+      "influx_machines": "2",
+      "influx_cores": "8",
+      "web_users": "99"
+    },
+    "plan": {
+      "name": "SAP Production"
+    },
+    "product": {
+      "name": "InfluxData Enterprise",
+      "family": "1.x"
+    }
+  },
+  "signature": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzUxMiJ9.eyJkYXRhIjp7ImtleSI6Ijg3Mjk1MzI5LTE5NDUtNDIzOC1iMDkxLTY3MTlkODg1Njk4MyIsInN0YXRlIjoiYWN0aXZlIiwiZXhwaXJlc19hdCI6IjIwMTctMDktMDFUMDA6MDA6MDBaIiwidmFsaWQiOnRydWUsImVudGl0bGVtZW50cyI6eyJpbmZsdXhfbWFjaGluZXMiOiIyIiwiaW5mbHV4X2NvcmVzIjoiOCIsIndlYl91c2VycyI6Ijk5In0sInBsYW4iOnsibmFtZSI6IlNBUCBQcm9kdWN0aW9uIn0sInByb2R1Y3QiOnsibmFtZSI6IkluZmx1eERhdGEgRW50ZXJwcmlzZSIsImZhbWlseSI6IjEueCJ9fSwiZXhwIjoxNTA0MjI0MDAwfQ.YTkBNJZJMwYZ9x9jJKvpfHYiVgg3IF2hXQPKR-CoCi2AQTpfLSs5lHkzmvycNfc55gx3T7oPrgFqu-hmUYJCF8EyF8FjrhjuV3iNI6PPV71RUPYfrXw8IJuRCkv60QZBk7DZc5O8oZCr5DMVnjFOSnS-UHq-cAj8exabhAGokQdcMjTjdtm-IcWO-bva3GxIY8ZfUZ0gmPuT_TVTFDgfDkWHe4MS7S8Q8YzHy3F-1P43s6-7Jt9Vh9y-MZLj9-nMw4bieZ-t0y2f3mTO7aeRTuRk36pAtg3tPWQPSTyTjdJc-nahGsCU2lXHvlLhHQDhMBxM3jeRc-nh9xj30myjKg",
+  "signature_expires_at": "2017-09-01T00:00:00Z"
+}'
   influxdbcluster:
     influxdb-meta: (( jobs.influxdb-meta.networks.influx-network.static_ips ))
     influxdb-data: (( jobs.influxdb-data.networks.influx-network.static_ips ))

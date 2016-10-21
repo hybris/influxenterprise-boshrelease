@@ -4,6 +4,7 @@ templates:
   influxdb.conf.erb: config/influxdb.conf
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
+  InfluxDB-Production.license.erb: license/InfluxDB-Production.license
 
 packages:
   - influxdb-data
@@ -13,9 +14,14 @@ properties:
     description: Long pass phrase that will be used to sign tokens
   influxdb.license-key:
     description: License key
-  influxdb-data.license-path:
+    default: ""
+  influxdb.license-path:
     description: Path to license if key not provided
     default: ""
+  influxdb.license-file:
+    description: License file content
+    default: ""
+
   influxdb-data.data-dir:
     description: Data Dir
     default: /var/vcap/store/influxdb/data
@@ -40,6 +46,7 @@ properties:
   influxdb-data.http-port:
     description: Controls how the HTTP endpoints are configured
     default: 8086
+
   influxdbcluster.influxdb-data:
     description: list of ips of data nodes in the cluster
     default: []

@@ -4,7 +4,7 @@ templates:
   influx-enterprise.conf.erb: config/influx-enterprise.conf
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
-
+  InfluxDB-Production.license.erb: license/InfluxDB-Production.license
 
 packages:
   - influxdb-web
@@ -19,13 +19,19 @@ properties:
   influxdb-web.port:
     description: This is the host and port you want to bind the application to
     default: 3000
+
   influxdb.license-key:
     description: You need either a license key or a license file to run Enterprise Web
-  influxdb-web.license-file:
-    description: You need either a license key or a license file to run Enterprise Web
-    default: "/path/to/license"
+    default: ""
+  influxdb.license-file:
+    description: License file content
+    default: ""
+  influxdb.license-path:
+    description: Path to license if key not provided
+    default: ""
   influxdb.shared-secret:
     description: The "shared-secret" let's us authenticate users between Enterprise Web and Enterprise
+
   influxdb-web.smtp-host:
     description: SMTP hostname
     default: localhost
@@ -38,6 +44,7 @@ properties:
   influxdb-web.database:
     description: Where is your database? # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
     default: sqlite3:///var/vcap/store/influxdb/enterprise.db
+
   influxdbcluster.influxdb-data:
     description: list of ips of data nodes in the cluster
     default: []

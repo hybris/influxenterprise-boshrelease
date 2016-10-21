@@ -1,4 +1,4 @@
-reporting-disabled = false
+reporting-disabled = true
 bind-address = ""
 hostname = "influxdb-meta-<%= spec.index %>"
 
@@ -7,7 +7,8 @@ hostname = "influxdb-meta-<%= spec.index %>"
   registration-enabled = true
   registration-server-url = "http://<%= p("influxdbcluster.influxdb-web")[0] %>:3000"
   license-key = "<%= p("influxdb.license-key") %>"
-  license-path = "<%= p("influxdb-meta.license-path") %>"
+  #license-path = "<%= p("influxdb.license-path") %>"
+  license-path = "/var/vcap/jobs/<%= spec.name %>/license/InfluxDB-Production.license"
 
 [meta]
   dir = "<%= p("influxdb-meta.meta-dir") %>"

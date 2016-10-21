@@ -20,6 +20,8 @@ influxdb/
 tmp
 *credentials.yml
 
+templates/license.yml
+
 ci/bin/update_pipeline_local.sh
 my*.yml
 deployments/

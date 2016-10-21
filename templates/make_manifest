@@ -61,11 +61,22 @@ perl -pi -e "s/PLACEHOLDER-DIRECTOR-UUID/$DIRECTOR_UUID/g" $tmpdir/stub-with-uui
 perl -pi -e "s/NAME/$NAME/g" $tmpdir/stub-with-uuid.yml
 perl -pi -e "s/STEMCELL/$STEMCELL/g" $tmpdir/stub-with-uuid.yml
 
+# if [[ ! -f $templates/license_new.yml ]]; then
+#   echo "file ${templates}/license_new.yml does NOT exists, exist"
+#   if [[  ]]; then
+#     echo "Variable setup"
+#
+#   fi
+# fi
+#
+# exit 1
+
 spiff merge \
   $templates/deployment.yml \
   $templates/jobs.yml \
   $templates/infrastructure-${infrastructure}.yml \
   $tmpdir/stub-with-uuid.yml \
+  $templates/license.yml \
   $* > $tmpdir/$NAME-manifest.yml
 
 bosh deployment $tmpdir/$NAME-manifest.yml

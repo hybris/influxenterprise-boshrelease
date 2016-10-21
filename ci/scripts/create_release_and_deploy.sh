@@ -29,6 +29,28 @@ set +e
 _bosh upload release --rebase || echo "Continuing..."
 set -e
 
+#Get the licence.yml file populated
+# if [[ ! -f $templates/license.yml ]]; then
+#   echo "file ${templates}/license.yml does NOT exists, exist"
+#   if [[ ${license-file} ]]; then
+#     echo "Variable setup"
+cat > templates/license.yml << EOF
+---
+properties:
+  influxdb:
+    license-key: ""
+#    license-key: "73e0a45e-525b-4281-a4a2-0d4549b5ae48"
+    #license-path: ""
+    shared-secret: "TOKEN6FzTpJ7oOJ8TDWVA7Q4EqjzGtGmLBUejfbk4yyCw"
+    license-file: '${license-file}'
+EOF
+
+#
+#   fi
+# fi
+#
+# exit 1
+
 ./templates/make_manifest warden
 
 _bosh deploy

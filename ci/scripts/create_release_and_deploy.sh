@@ -47,6 +47,7 @@ properties:
     license-file: '${license-file}'
 EOF
 
+cat templates/license.yml
 #
 #   fi
 # fi

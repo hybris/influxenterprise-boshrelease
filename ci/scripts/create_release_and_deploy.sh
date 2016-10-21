@@ -34,6 +34,7 @@ set -e
 #   echo "file ${templates}/license.yml does NOT exists, exist"
 #   if [[ ${license-file} ]]; then
 #     echo "Variable setup"
+echo ${license-file}
 cat > templates/license.yml << EOF
 ---
 properties:

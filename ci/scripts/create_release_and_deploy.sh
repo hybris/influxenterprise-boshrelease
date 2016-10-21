@@ -44,9 +44,10 @@ properties:
 #    license-key: "73e0a45e-525b-4281-a4a2-0d4549b5ae48"
     #license-path: ""
     shared-secret: "TOKEN6FzTpJ7oOJ8TDWVA7Q4EqjzGtGmLBUejfbk4yyCw"
-    license-file: '${license-file}'
+    license-file: '${license_file}'
 EOF
 
+cat templates/license.yml
 #
 #   fi
 # fi

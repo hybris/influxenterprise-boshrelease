@@ -35,7 +35,7 @@ set -e
 #   if [[ ${license-file} ]]; then
 #     echo "Variable setup"
 
-echo ${license_file}
+echo "${license_file}"
 cat > templates/license.yml << EOF
 ---
 properties:

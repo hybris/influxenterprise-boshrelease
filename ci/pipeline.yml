@@ -42,6 +42,8 @@ jobs:
           bosh_username: {{bosh-lite-build-username}}
           bosh_password: {{bosh-lite-build-password}}
           bosh_deployment_name: {{bosh-lite-build-deployment-name}}
+          license_key: ""
+          shared_secret: "{{shared_secret}}"
           license_file: {{license_file}}
 
 - name: rc

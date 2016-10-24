@@ -28,12 +28,6 @@ update:
   serial: false
 
 resource_pools:
-  # - name: small_z1
-  #   network: influxenterprise1
-  #   size: (( auto ))
-  #   stemcell: (( meta.stemcell ))
-  #   cloud_properties: (( merge ))
-
   - name: influx-resource-pool
     network: influx-network
     size: (( auto ))

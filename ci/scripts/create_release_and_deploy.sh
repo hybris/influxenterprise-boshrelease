@@ -1,5 +1,5 @@
 #!/bin/bash
-set -x
+
 # change to root of bosh release
 DIR=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 cd $DIR/../..
@@ -35,15 +35,12 @@ set -e
 #   if [[ ${license-file} ]]; then
 #     echo "Variable setup"
 
-echo "${license_file}"
 cat > templates/license.yml << EOF
 ---
 properties:
   influxdb:
-    license-key: ""
-#    license-key: "73e0a45e-525b-4281-a4a2-0d4549b5ae48"
-    #license-path: ""
-    shared-secret: "TOKEN6FzTpJ7oOJ8TDWVA7Q4EqjzGtGmLBUejfbk4yyCw"
+    license-key: "${license_key:}"
+    shared-secret: "${shared_secret}"
     license-file: '${license_file}'
 EOF
 

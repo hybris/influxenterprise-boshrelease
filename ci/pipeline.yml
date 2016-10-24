@@ -42,7 +42,9 @@ jobs:
           bosh_username: {{bosh-lite-build-username}}
           bosh_password: {{bosh-lite-build-password}}
           bosh_deployment_name: {{bosh-lite-build-deployment-name}}
-          license_file: {{license_file}}
+          license_key: {{license-key}}
+          shared_secret: {{shared-secret}}
+          license_file: {{license-file}}
 
 - name: rc
   public: true

@@ -39,8 +39,8 @@ cat > templates/license.yml << EOF
 ---
 properties:
   influxdb:
-    license-key: "${license_key:}"
-    shared-secret: "${shared_secret}"
+    license-key: ${license_key}
+    shared-secret: ${shared_secret}
     license-file: '${license_file}'
 EOF
 

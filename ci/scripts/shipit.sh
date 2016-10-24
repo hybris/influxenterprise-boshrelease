@@ -43,7 +43,7 @@ if [[ "${release_name}X" == "X" ]]; then
 fi
 
 echo Prepare github release information
-set -x
+#set -x
 mkdir -p release
 cp ci/release_notes.md release/notes.md
 echo "${release_name} v${version}" > release/name

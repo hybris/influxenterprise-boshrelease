@@ -3,6 +3,8 @@ set -e
 
 #Here to implement the loop that will check via ping all the cluster meta nodes are up and running before the join command is issued.
 
+
+
 #Check if not a member of the cluster already
 if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q influxdb; then
   echo "Already a member of the cluster, exit"
@@ -12,12 +14,15 @@ else
   #following will only run if this is the last node in the cluster
   if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-meta-2 8091 && nc -z influxdb-data-0 8088 && nc -z influxdb-data-1 8088; then
     echo "This seems to be the last node so we can make the cluste now!" ;
+    sleep $[ ( $RANDOM % 5 )  + 1 ]s
 
     <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
     /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
+    wait $!
     <% end %>
     <% p("influxdbcluster.influxdb-data").each_index do |i| %>
     /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
+    wait $!
     <% end %>
 
     # following to check if the nodes are joined

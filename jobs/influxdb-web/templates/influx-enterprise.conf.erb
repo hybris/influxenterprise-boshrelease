@@ -24,8 +24,8 @@ shared-secret = "<%= p("influxdb.shared-secret") %>" # ENV: SHARED_SECRET
 # invite users to the application.
 host = "<%= p("influxdb-web.smtp-host") %>" # ENV: SMTP_HOST
 port = "<%= p("influxdb-web.smtp-port") %>" # ENV: SMTP_PORT
-username = "" # ENV: SMTP_USERNAME
-password = "" # ENV: SMTP_PASSWORD
+username = "<%= p("influxdb-web.smtp-username") %>" # ENV: SMTP_USERNAME
+password = "<%= p("influxdb-web.smtp-password") %>" # ENV: SMTP_PASSWORD
 from_email = "<%= p("influxdb-web.smtp-fromemail") %>" # ENV: SMTP_FROM_EMAIL
 
 [database]

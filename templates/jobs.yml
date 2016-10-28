@@ -36,6 +36,12 @@ networks: (( merge ))
 properties:
   influxdb-web:
     database: sqlite3:///var/vcap/store/influxdb/enterprise.db
+    smtp-host: localhost
+    smtp-port: 25
+    smtp-username: ""
+    smtp-password: ""
+    smtp-fromemail: team-idefix@sap.com
+
   influxdb:
 
   influxdbcluster:

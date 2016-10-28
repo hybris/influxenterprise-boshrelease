@@ -38,9 +38,15 @@ properties:
   influxdb-web.smtp-port:
     description: SMTP server port
     default: 25
+  influxdb-web.smtp-username:
+    description: SMTP USERNAME
+    default: ""
+  influxdb-web.smtp-password:
+    description: SMTP password
+    default: ""
   influxdb-web.smtp-fromemail:
     description: SMTP sender email
-    default: idefix@sap.com
+    default: team-idefix@sap.com
   influxdb-web.database:
     description: Where is your database? # NOTE: This version of Enterprise Web currently only supports Postgres >= 9.3 or SQLite3
     default: sqlite3:///var/vcap/store/influxdb/enterprise.db

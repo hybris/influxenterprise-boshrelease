@@ -20,10 +20,12 @@ meta-tls-enabled = false
 
 [meta]
   enabled = false
+  retention-autocreation = true
   dir = "<%= p("influxdb-data.meta-dir") %>"
 
 [data]
   enabled = true
+  retention-autocreation = true
   dir = "<%= p("influxdb-data.data-dir") %>"
   engine = "tsm1"
   max-wal-size = 104857600
@@ -88,9 +90,10 @@ meta-tls-enabled = false
   shared-secret = "<%= p("influxdb.shared-secret") %>"
 
 [[graphite]]
-  enabled = true
+  enabled = false
   bind-address = ":2003"
   database = "graphite"
+  retention-policy = ""
   protocol = "tcp"
   batch-size = 5000
   batch-pending = 10

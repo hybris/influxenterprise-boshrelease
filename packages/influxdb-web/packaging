@@ -1,7 +1,7 @@
 # abort script on any command that exits with a non zero value
 set -e -x
 
-VERSION=1.0.0
+VERSION=1.0.3
 
 echo "Extracting Influx Enterprise Web Node..."
 tar -xvf influxdb/influx-enterprise-${VERSION}_linux_amd64.tar.gz

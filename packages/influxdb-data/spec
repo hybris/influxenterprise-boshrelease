@@ -2,4 +2,4 @@
 name: influxdb-data
 
 files:
-  - influxdb/influxdb-data-1.0.0-c1.0.0_linux_amd64.tar.gz
+  - influxdb/influxdb-data-1.0.2-c1.0.4_linux_amd64.tar.gz

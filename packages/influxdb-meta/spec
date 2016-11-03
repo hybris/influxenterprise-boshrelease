@@ -2,4 +2,4 @@
 name: influxdb-meta
 
 files:
-  - influxdb/influxdb-meta-1.0.2-c1.0.4_linux_amd64.tar.gz
+  - influxdb/influxdb-meta-1.1.0-rc1-c1.1.0rc1_linux_amd64.tar.gz

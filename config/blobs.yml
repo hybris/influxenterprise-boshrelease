@@ -23,3 +23,11 @@ influxdb/influxdb-meta-1.0.2-c1.0.4_linux_amd64.tar.gz:
   object_id: f9547499-301d-40ba-9e41-090dba12bc9a
   sha: 39372cd708cf374fd7dad873b10ddfb6da078e4b
   size: 9094660
+influxdb/influxdb-data-1.1.0-rc1-c1.1.0rc1_linux_amd64.tar.gz:
+  object_id: 063b5fdc-04b5-4ab2-b124-0fe66a0496cd
+  sha: 240f6b41313554273a2e24cb30055c66cb921e33
+  size: 18786386
+influxdb/influxdb-meta-1.1.0-rc1-c1.1.0rc1_linux_amd64.tar.gz:
+  object_id: 9fb1e880-5f2d-4dd7-9a51-8a0228e81d72
+  sha: 8f292c502a7322c6e8dcba02942ca9ce15760bca
+  size: 9286371

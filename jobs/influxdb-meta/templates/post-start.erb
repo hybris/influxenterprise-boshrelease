@@ -1,61 +1,72 @@
 #!/bin/bash
 set -e
 
-#Here to implement the loop that will check via ping all the cluster meta nodes are up and running before the join command is issued.
+#Check if all the nodes are up and runing so ready to join
+if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-meta-2 8091 && nc -z influxdb-data-0 8088 && nc -z influxdb-data-1 8088; then
 
-#Check if not a member of the cluster already
-if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q <%= spec.name %>-<%= spec.index %>; then
-  echo "Node <%= spec.name %>-<%= spec.index %> already a member of the cluster, exit"
-  exit 0
-else
-  #Not a memmber of the cluster yet, check if the other conditions are met
+  echo "This node (<%= spec.name %>-<%= spec.index %>) seems to be the last node so we can make the cluste now!"
 
-  #following will only run if this is the last node in the cluster
-  if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-meta-2 8091 && nc -z influxdb-data-0 8088 && nc -z influxdb-data-1 8088; then
+  sleep $[ ( $RANDOM % 5 ) * 2 * ( <%= spec.index %> + 1 ) + 1 + 6 ]s
 
-    sleep $[ ( $RANDOM % 5 )  + 1 ]s
-
-    if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q <%= spec.name %>; then
-      echo "some node already initiating cluster, exit"
-      exit 0
-    fi
-
-    sleep $[ ( $RANDOM % 5 )  + 1 ]s
-
-    echo "This node (<%= spec.name %>-<%= spec.index %>) seems to be the last node so we can make the cluste now!"
-
-    echo "Adding META nodes"
+  if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q influxdb-meta; then
+    echo "No Meta nodes defined - Adding META nodes"
     <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
-      if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q "influxdb-meta-<%= i %>:8091"; then
-        echo "Node: influxdb-meta-<%= i %>:8091 already eists, some other node already initiated cluster, exiting"
-        exit 0
-      else
-        /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
-        wait $!
-      fi
+      time /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join -v influxdb-meta-<%= i %>:8091
+                    #  if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q "influxdb-meta-<%= i %>:8091"; then
+                    #    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
+                    #    #      else
+                    #    #        echo "Node: influxdb-meta-<%= i %>:8091 already eists, some other node already initiated cluster, exiting"
+                    #    #        exit 0
+                    #    #        wait $!
+                    #  fi
     <% end %>
 
-    echo "Adding DATA nodes"
+      #    if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q data; then
+      #    fi
+
+    echo "No data Nodes defined - Adding DATA nodes"
     <% p("influxdbcluster.influxdb-data").each_index do |i| %>
-      if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q "influxdb-data-<%= i %>:8088"; then
-        echo "Node: influxdb-data-<%= i %>:8088 already eists, some other node already initiated cluster, exiting"
-        exit 0
-      elif [ "$(/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep influxdb-data | wc -l)" = 2 ] ; then
-        echo "Two data nodes alredy exists, licence limit exceeded, exiting "
-        exit 0
-      else
-        /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
-        wait $!
-      fi
+      /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
+                  #if [ "$(/var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep influxdb-data | wc -l)" = 2 ] ; then
+                  #  echo "Two data nodes alredy exists, licence limit exceeded, exiting "
+                  #  #exit 0
+                  #else
+                  #  if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q "influxdb-data-<%= i %>:8088"; then
+                  #    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-data influxdb-data-<%= i %>:8088
+                  #  #else
+                  #    #echo "Node: influxdb-data-<%= i %>:8088 already eists, some other node already initiated cluster, exiting"
+                  #    #exit 0
+                  #  fi
+                  #  #else
+                  #  #wait $!
+                  #fi
     <% end %>
 
-    # following to check if the nodes are joined
-    wait $!
-    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show
+
+
+
 
   else
-    echo "Not the last NODE - carry on - not all the meta and data nodes are up and runing and listening on ports 8091 and 8088"
-    exit 0
+    echo "Some node already initiating cluster, movingon"
+    #exit 0
+
+    ##Check if not a member of the cluster already
+    #if /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q <%= spec.name %>-<%= spec.index %>; then
+    #  echo "Node <%= spec.name %>-<%= spec.index %> already a member of the cluster, exit"
+    #  # exit 0
+
+    #elif
+
+    #fi
   fi
+
+
+  # following to check if the nodes are joined
+  # wait $!
+  /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show
+
+else
+  echo "Not the last NODE - carry on - not all the meta and data nodes are up and runing and listening on ports 8091 and 8088"
+  exit 0
 fi
 exit 0

@@ -127,9 +127,9 @@ meta-tls-enabled = false
   log-point-errors = true
 
 [[udp]]
-  enabled = false
+  enabled = true
   bind-address = ":8089"
-  database = "udp"
+  database = "influxcluster"
   retention-policy = ""
   batch-size = 5000
   batch-pending = 10

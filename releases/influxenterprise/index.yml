@@ -22,4 +22,6 @@ builds:
     version: 2.6.0
   32968503-7556-4032-a524-0aa373a99292:
     version: 2.12.0
+  fb7f5412-4add-4190-aece-9dcc8ba0c046:
+    version: 2.13.0
 format-version: '2'

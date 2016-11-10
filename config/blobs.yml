@@ -31,3 +31,7 @@ influxdb/influxdb-meta-1.1.0-rc1-c1.1.0rc1_linux_amd64.tar.gz:
   object_id: 9fb1e880-5f2d-4dd7-9a51-8a0228e81d72
   sha: 8f292c502a7322c6e8dcba02942ca9ce15760bca
   size: 9286371
+influxdb/telegraf-1.1.0~rc1_linux_amd64.tar.gz:
+  object_id: 3be8fcb3-aeeb-4c86-9cca-b5141f12687e
+  sha: 774e721f8220de7a0b61f60fa14e64e9591575e6
+  size: 9585972

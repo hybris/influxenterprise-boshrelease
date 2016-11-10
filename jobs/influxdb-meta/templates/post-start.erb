@@ -6,12 +6,13 @@ if nc -z influxdb-meta-0 8091 && nc -z influxdb-meta-1 8091 && nc -z influxdb-me
 
   echo "This node (<%= spec.name %>-<%= spec.index %>) seems to be the last node so we can make the cluste now!"
 
-  sleep $[ ( $RANDOM % 5 ) * 2 * ( <%= spec.index %> + 1 ) + 1 + 6 ]s
+  #sleep $[ ( $RANDOM % 5 ) * 2 * ( <%= spec.index %> + 1 ) + 1 + 6 ]s
 
   if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q influxdb-meta; then
     echo "No Meta nodes defined - Adding META nodes"
     <% p("influxdbcluster.influxdb-meta").each_index do |i| %>
-      time /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join -v influxdb-meta-<%= i %>:8091
+#    time /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join -v influxdb-meta-<%= i %>:8091
+    time /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl add-meta influxdb-meta-<%= i %>:8091
                     #  if ! /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl show | grep -q "influxdb-meta-<%= i %>:8091"; then
                     #    /var/vcap/packages/<%= spec.name %>/usr/bin/influxd-ctl join influxdb-meta-<%= i %>:8091
                     #    #      else

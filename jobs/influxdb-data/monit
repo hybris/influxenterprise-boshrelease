@@ -3,9 +3,3 @@ check process influxdb
   start program "/var/vcap/jobs/influxdb-data/bin/init.sh start" with timeout 60 seconds
   stop program "/var/vcap/jobs/influxdb-data/bin/init.sh stop" with timeout 60 seconds
   group vcap
-
-check process telegraf
-  with pidfile /var/vcap/sys/run/influxdb-data/telegraf.pid
-  start program "/var/vcap/jobs/influxdb-data/bin/telegraf.init.sh start" with timeout 60 seconds
-  stop program "/var/vcap/jobs/influxdb-data/bin/telegraf.init.sh stop" with timeout 60 seconds
-  group vcap

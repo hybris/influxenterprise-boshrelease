@@ -5,12 +5,9 @@ templates:
   init.sh.erb: bin/init.sh
   pre-start.erb: bin/pre-start
   InfluxDB-Production.license.erb: license/InfluxDB-Production.license
-  telegraf.conf.erb: config/telegraf.conf
-  telegraf.init.sh.erb: bin/telegraf.init.sh
 
 packages:
   - influxdb-data
-  - telegraf
 
 properties:
   influxdb.shared-secret:

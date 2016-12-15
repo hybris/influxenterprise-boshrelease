@@ -1,10 +1,7 @@
 # abort script on any command that exits with a non zero value
 set -e -x
 
-VERSION=1.1.0~rc1
+VERSION=1.1.1
 
 echo "Extracting Influx Data Node..."
-tar -xvf influxdb/telegraf-${VERSION}_linux_amd64.tar.gz
-
-echo "Preparing Influx Data Node..."
-cp -a telegraf/. ${BOSH_INSTALL_TARGET}
+tar -xvf influxdb/telegraf-${VERSION}_linux_amd64.tar.gz -C ${BOSH_INSTALL_TARGET} --strip-components 2

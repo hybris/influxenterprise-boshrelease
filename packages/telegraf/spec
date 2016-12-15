@@ -2,4 +2,4 @@
 name: telegraf
 
 files:
-  - influxdb/telegraf-1.1.0~rc1_linux_amd64.tar.gz
+  - influxdb/telegraf-1.1.1_linux_amd64.tar.gz

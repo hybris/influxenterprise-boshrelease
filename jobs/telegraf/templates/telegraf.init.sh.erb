@@ -33,12 +33,12 @@ PACKAGE_NAME=telegraf
 # Process name ( For display )
 NAME=${PACKAGE_NAME}
 
-RUN_DIR=/var/vcap/sys/run/${JOB_NAME}
-LOG_DIR=/var/vcap/sys/log/${JOB_NAME}
+RUN_DIR=/var/vcap/sys/run/${PACKAGE_NAME}
+LOG_DIR=/var/vcap/sys/log/${PACKAGE_NAME}
 mkdir -p ${RUN_DIR} ${LOG_DIR}
 chown -R vcap:vcap ${RUN_DIR} ${LOG_DIR}
-exec 1>> ${LOG_DIR}/$JOB_NAME.telegraf.stdout.log
-exec 2>> $LOG_DIR/$JOB_NAME.telegraf.stderr.log
+exec 1>> ${LOG_DIR}/telegraf.stdout.log
+exec 2>> ${LOG_DIR}/telegraf.stderr.log
 
 PIDFILE=$RUN_DIR/telegraf.pid
 
@@ -51,7 +51,7 @@ DAEMON=/var/vcap/packages/${PACKAGE_NAME}/usr/bin/telegraf
 [ -x $DAEMON ] || exit 5
 
 # Configuration file
-CONFIG=/var/vcap/jobs/${JOB_NAME}/config/telegraf.conf
+CONFIG=/var/vcap/jobs/${PACKAGE_NAME}/config/telegraf.conf
 
 if [ -r /lib/lsb/init-functions ]; then
     source /lib/lsb/init-functions

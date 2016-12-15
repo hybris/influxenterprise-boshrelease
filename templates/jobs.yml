@@ -4,13 +4,15 @@ meta:
 update:
   canaries: 1
   max_in_flight: 1
-  canary_watch_time: 1000-15000
-  update_watch_time: 1000-15000
+  canary_watch_time: 1000-60000
+  update_watch_time: 1000-60000
   serial: true
 
 jobs:
   - name: influxdb-data
-    template: influxdb-data
+    templates:
+    - {name: influxdb-data, release: influxenterprise}
+    - {name: telegraf, release: influxenterprise}
     instances: 2
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -18,7 +20,9 @@ jobs:
     properties: {}
 
   - name: influxdb-meta
-    template: influxdb-meta
+    templates:
+    - {name: influxdb-meta, release: influxenterprise}
+    - {name: telegraf, release: influxenterprise}
     instances: 3
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -26,7 +30,9 @@ jobs:
     properties: {}
 
   - name: influxdb-web
-    template: influxdb-web
+    templates:
+    - {name: influxdb-web, release: influxenterprise}
+    - {name: telegraf, release: influxenterprise}
     instances: 1
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -48,3 +54,20 @@ properties:
     influxdb-meta: (( jobs.influxdb-meta.networks.influx-network.static_ips ))
     influxdb-data: (( jobs.influxdb-data.networks.influx-network.static_ips ))
     influxdb-web: (( jobs.influxdb-web.networks.influx-network.static_ips ))
+
+  telegraf:
+    dc: ue-germany-munich-1
+    deployment: InfluxDB-boshlite
+    team: Idefix
+
+  USinfluxdbcluster:
+    ELB: http://influxdb.us.tools.yaas.io:8086
+    DB: influxcluster
+    user: ""
+    password: ""
+
+  EUinfluxdbcluster:
+    ELB: http://influx.eu-central.tools.yaas.io:8086
+    DB: influxcluster
+    user: ""
+    password: ""

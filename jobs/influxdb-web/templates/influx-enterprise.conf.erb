@@ -13,6 +13,8 @@ license-key = "<%= p("influxdb.license-key") %>" # ENV: LICENSE_KEY
 # ENV: LICENSE_FILE
 #license-file = "<%= p("influxdb.license-path") %>"
 license-file = "/var/vcap/jobs/<%= spec.name %>/license/InfluxDB-Production.license"
+session-lifetime = "24h" # time until users are logged out automatically
+autologout = false # triggers logout on browser tab close
 
 [influxdb]
 # The "shared-secret" let's us authenticate users between Enterprise Web

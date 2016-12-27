@@ -35,3 +35,19 @@ influxdb/telegraf-1.1.0~rc1_linux_amd64.tar.gz:
   object_id: 3be8fcb3-aeeb-4c86-9cca-b5141f12687e
   sha: 774e721f8220de7a0b61f60fa14e64e9591575e6
   size: 9585972
+influxdb/influx-enterprise-1.1.1_linux_amd64.tar.gz:
+  object_id: f9d8f50d-1b5b-4b8b-bcc7-96ac07a5e1a6
+  sha: 0501d67f07ca43a2eb3554a84ac56653ead367f1
+  size: 8582827
+influxdb/influxdb-meta-1.1.1-c1.1.1_linux_amd64.tar.gz:
+  object_id: 6f3043b4-1633-4298-9882-d8b523ab45a0
+  sha: 9fa572e8c60755b6497532c8c7a8cdf41a427cc2
+  size: 8388711
+influxdb/telegraf-1.1.1_linux_amd64.tar.gz:
+  object_id: fb523c13-b8cb-46a8-b4a9-1574ca52c489
+  sha: d6783a7621afa373c86da6a0dc0a62c632f57dd4
+  size: 9585773
+influxdb/influxdb-data-1.1.1-c1.1.1_linux_amd64.tar.gz:
+  object_id: 27026450-0210-4896-a751-1608e77ff185
+  sha: 5f6605e409f87d268831eba3349aec01d576feb7
+  size: 16173003

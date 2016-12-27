@@ -2,4 +2,4 @@
 name: influxdb-web
 
 files:
-  - influxdb/influx-enterprise-1.0.3_linux_amd64.tar.gz
+  - influxdb/influx-enterprise-1.1.1_linux_amd64.tar.gz

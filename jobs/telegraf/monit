@@ -1,5 +1,5 @@
 check process telegraf
   with pidfile /var/vcap/sys/run/telegraf/telegraf.pid
-  start program "/var/vcap/jobs/telegraf/bin/init.sh start" with timeout 60 seconds
-  stop program "/var/vcap/jobs/telegraf/bin/init.sh stop" with timeout 60 seconds
+  start program "/var/vcap/jobs/telegraf/bin/init.sh start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/telegraf/bin/init.sh stop" with timeout 30 seconds
   group vcap

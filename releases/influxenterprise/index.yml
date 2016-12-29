@@ -30,4 +30,6 @@ builds:
     version: 2.18.0
   20efdfae-0885-4899-81b7-39bcb87cc8ab:
     version: 2.20.0
+  7b6484a0-61e8-4cde-80a6-173f97831640:
+    version: 2.23.0
 format-version: '2'

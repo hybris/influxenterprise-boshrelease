@@ -38,4 +38,6 @@ builds:
     version: 2.27.0
   e5c2a32d-c5e6-4a86-89e0-b81c11caa619:
     version: 2.29.0
+  01325824-a99a-4acc-aaaf-5fcc43bcbf9e:
+    version: 2.31.0
 format-version: '2'

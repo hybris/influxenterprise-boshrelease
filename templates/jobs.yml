@@ -12,7 +12,6 @@ jobs:
   - name: influxdb-data
     templates:
     - {name: influxdb-data, release: influxenterprise}
-    - {name: telegraf, release: influxenterprise}
     instances: 2
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -22,7 +21,6 @@ jobs:
   - name: influxdb-meta
     templates:
     - {name: influxdb-meta, release: influxenterprise}
-    - {name: telegraf, release: influxenterprise}
     instances: 3
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -32,7 +30,6 @@ jobs:
   - name: influxdb-web
     templates:
     - {name: influxdb-web, release: influxenterprise}
-    - {name: telegraf, release: influxenterprise}
     instances: 1
     resource_pool: influx-resource-pool
     networks: (( merge ))
@@ -54,11 +51,6 @@ properties:
     influxdb-meta: (( jobs.influxdb-meta.networks.influx-network.static_ips ))
     influxdb-data: (( jobs.influxdb-data.networks.influx-network.static_ips ))
     influxdb-web: (( jobs.influxdb-web.networks.influx-network.static_ips ))
-
-  telegraf:
-    dc: ue-germany-munich-1
-    deployment: InfluxDB-boshlite
-    team: Idefix
 
   USinfluxdbcluster:
     ELB: http://influxdb.us.tools.yaas.io:8086

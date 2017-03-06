@@ -1,5 +1,0 @@
----
-name: telegraf
-
-files:
-  - influxdb/telegraf-1.1.2_linux_amd64.tar.gz

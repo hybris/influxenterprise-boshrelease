@@ -40,4 +40,6 @@ builds:
     version: 2.29.0
   01325824-a99a-4acc-aaaf-5fcc43bcbf9e:
     version: 2.31.0
+  f2894303-b2cd-47c1-8c2c-1e9a19743f91:
+    version: 2.33.0
 format-version: '2'

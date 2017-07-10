@@ -10,6 +10,7 @@
 reporting-disabled = true
 hostname = "influxdb-data-<%= spec.index %>"
 meta-tls-enabled = false
+gossip-frequency = "3s"
 
 [enterprise]
   registration-enabled = true
@@ -52,7 +53,6 @@ meta-tls-enabled = false
 [cluster]
   force-remote-mapping = false
   write-timeout = "5s"
-  shard-writer-timeout = "5s"
   max-remote-write-connections = 3
   shard-mapper-timeout = "5s"
 
@@ -155,3 +155,4 @@ meta-tls-enabled = false
   retry-interval = "1s"
   retry-max-interval = "1m0s"
   purge-interval = "1h0m0s"
+  # batch-size = 512000

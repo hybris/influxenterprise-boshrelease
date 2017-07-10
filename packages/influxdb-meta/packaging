@@ -1,7 +1,7 @@
 # abort script on any command that exits with a non zero value
 set -e -x
 
-VERSION=1.1.1-c1.1.1
+VERSION=1.2.4-c1.2.5
 
 echo "Extracting Influx Data Node..."
 tar -xvf influxdb/influxdb-meta-${VERSION}_linux_amd64.tar.gz -C ${BOSH_INSTALL_TARGET} --strip-components 2

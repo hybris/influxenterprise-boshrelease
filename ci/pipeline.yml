@@ -34,20 +34,20 @@ jobs:
         image_resource:
           type: docker-image
           source:
-            repository: teamidefix/influxenterprise-boshrelease-pipeline
+            repository: ((docker.image))
         inputs:
         - {name: influxenterprise-boshrelease}
         run:
           path: ./influxenterprise-boshrelease/ci/scripts/create_release_and_deploy.sh
           args: []
         params:
-          bosh_target: {{bosh-lite-build-target}}
-          bosh_username: {{bosh-lite-build-username}}
-          bosh_password: {{bosh-lite-build-password}}
-          bosh_deployment_name: {{bosh-lite-build-deployment-name}}
-          license_key: {{license-key}}
-          shared_secret: {{shared-secret}}
-          license_file: {{license-file}}
+          bosh_target: ((bosh-lite-build.target))
+          bosh_username: ((bosh-lite-build.username))
+          bosh_password: ((bosh-lite-build.password))
+          bosh_deployment_name: influxenterprise
+          license_key: 
+          shared_secret: ((influxenterprise-license.shared-secret))
+          license_file: ((influxenterprise-license.license-file))
 
 - name: rc
   public: true
@@ -122,12 +122,12 @@ jobs:
         args: []
       params:
         release_name: "influxenterprise BOSH Release"
-        bosh_target: {{bosh-lite-build-target}}
-        bosh_username: {{bosh-lite-build-username}}
-        bosh_password: {{bosh-lite-build-password}}
-        bosh_deployment_name: {{bosh-lite-build-deployment-name}}
-        aws_access_key_id: {{boshrelease-aws-access-key-id}}
-        aws_secret_access_key: {{boshrelease-aws-secret-access-key}}
+        bosh_target: ((bosh-lite-build.target))
+        bosh_username: ((bosh-lite-build.username))
+        bosh_password: ((bosh-lite-build.password))
+        bosh_deployment_name: influxenterprise
+        aws_access_key_id: ((user-aws-concourse.aws_access_key))
+        aws_secret_access_key: ((user-aws-concourse.aws_secret_key))
         promotion_branch: master
         output_dir: ../output/influxenterprise-boshrelease
   - put: git-influxenterprise-boshrelease
@@ -165,22 +165,22 @@ resources:
   type: semver
   source:
     key: current-version
-    bucket: {{pipeline-aws-bucket}}
-    access_key_id: {{pipeline-aws-access-key-id}}
-    secret_access_key: {{pipeline-aws-secret-access-key}}
+    bucket: ((s3.pipeline-bucket))
+    access_key_id: ((user-aws-concourse-idefixoperationsprod.aws_access_key))
+    secret_access_key: ((user-aws-concourse-idefixoperationsprod.aws_secret_key))
     initial_version: 0.0.0
 
 - name: git-influxenterprise-boshrelease
   type: git
   source:
-    uri: {{pipeline-git-repo}}
-    branch: {{pipeline-branch}}
+    uri: ((git.uri))
+    branch: ((git.branch))
 
 - name: git-influxenterprise-boshrelease-release-changes
   type: git
   source:
-    uri: {{pipeline-git-repo}}
-    branch: {{pipeline-branch}}
+    uri: ((git.uri))
+    branch: ((git.branch))
     paths:
       - src/**/*
       - jobs/**/*
@@ -195,27 +195,27 @@ resources:
   source:
     user: hybris
     repository: influxenterprise-boshrelease
-    access_token: {{github-access-token}}
+    access_token: ((github.accessToken))
 
 - name: final-release
   type: s3
   source:
-    bucket: {{boshrelease-aws-bucket}}
+    bucket: ((s3-buckets.boshreleases))
     regexp: influxenterprise-boshrelease/influxenterprise-(.*).tgz
-    access_key_id: {{boshrelease-aws-access-key-id}}
-    secret_access_key: {{boshrelease-aws-secret-access-key}}
+    access_key_id: ((user-aws-concourse.aws_access_key))
+    secret_access_key: ((user-aws-concourse.aws_secret_key))
 
 - name: git-boshrelease
   type: git
   source:
-    uri: {{pipeline-git-repo}}
-    branch: {{pipeline-branch}}
+    uri: ((git.uri))
+    branch: ((git.branch))
     paths: [ci/ci_image/*]
 
 - name: docker-image
   type: docker-image
   source:
-    email: {{docker-hub-email}}
-    username: {{docker-hub-username}}
-    password: {{docker-hub-password}}
-    repository: {{docker-create-hub-task-image}}
+    email: ((docker-hub.email))
+    username: ((docker-hub.username))
+    password: ((docker-hub.password))
+    repository: ((docker.image))

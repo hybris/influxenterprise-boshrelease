@@ -1,0 +1,38 @@
+---
+packages:
+- name: influxdb-meta
+  version: 415095f07b2d9a64a9090879f3b7c46f2db2ec27
+  fingerprint: 415095f07b2d9a64a9090879f3b7c46f2db2ec27
+  sha1: 3661fe7ec62e7261ccb931370ecd15da5c7e5c28
+  dependencies: []
+- name: influxdb-web
+  version: 8f0b3b50375299468770a630a24aa22078538000
+  fingerprint: 8f0b3b50375299468770a630a24aa22078538000
+  sha1: 5bb9cd8f134e70e87e06f9d2963b31d35c5b37c3
+  dependencies: []
+- name: influxdb-data
+  version: 4746bc23981bdabee5147bfb5464d54934b85cd0
+  fingerprint: 4746bc23981bdabee5147bfb5464d54934b85cd0
+  sha1: 83a88ba9e44439a1ef44a17a05eff938bd9a048d
+  dependencies: []
+jobs:
+- name: influxdb-meta
+  version: 36ca7658d91a8874c1433e6a66a5694e3e3ac583
+  fingerprint: 36ca7658d91a8874c1433e6a66a5694e3e3ac583
+  sha1: 16b99601cc8cc9faa8a2d2590819ec0fe0ba1b40
+- name: influxdb-web
+  version: 6a6b4dba7efde15fcb6f6eceac67a66d8f135e93
+  fingerprint: 6a6b4dba7efde15fcb6f6eceac67a66d8f135e93
+  sha1: ed72a0e53a2829a6cf2f596343ec5307638f009c
+- name: influxdb-data
+  version: 7dcf4bb2c5f3bb8708b947383c9a46d1374f2f5a
+  fingerprint: 7dcf4bb2c5f3bb8708b947383c9a46d1374f2f5a
+  sha1: 197a720bb65ee407a0ed5f831b9b4ad49f320be7
+license:
+  version: 676c8daec0d50a3e22f6d824b64b6db752e13d6b
+  fingerprint: 676c8daec0d50a3e22f6d824b64b6db752e13d6b
+  sha1: 724453c4d10e4ece8bc89cb5bf8e54b79f3df925
+commit_hash: 15787a38
+uncommitted_changes: false
+name: influxenterprise
+version: 2.37.0
